@@ -184,6 +184,12 @@
   .shadow-royal { box-shadow: var(--shadow-royal); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
 
+  /* Backward-compat aliases (gold/forest → cyan/royal) */
+  .bg-gradient-gold { background: var(--gradient-cyan); }
+  .bg-gradient-forest { background: var(--gradient-royal); }
+  .shadow-gold { box-shadow: var(--shadow-cyan); }
+  .shadow-forest { box-shadow: var(--shadow-royal); }
+
   .text-gradient-aurora {
     background: var(--gradient-aurora);
     -webkit-background-clip: text;
