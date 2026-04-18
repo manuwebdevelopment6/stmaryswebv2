@@ -10,10 +10,10 @@ export const CtaBand = () => (
         <div className="absolute -left-10 -bottom-24 h-60 w-60 rounded-full border-[30px] border-primary-foreground/10" />
         <div className="relative grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="font-display font-bold text-display-md text-accent-foreground text-balance">
+            <h2 className="font-display font-bold text-display-md text-primary-foreground text-balance">
               Ready to join the St. Mary's family?
             </h2>
-            <p className="mt-4 text-accent-foreground/80 max-w-md">
+            <p className="mt-4 text-primary-foreground/85 max-w-md">
               Form 1 admissions for 2026 are open. Submit your application online — or book a campus visit to see us in person.
             </p>
           </div>
@@ -21,7 +21,7 @@ export const CtaBand = () => (
             <Button asChild variant="forest" size="xl">
               <Link to="/admissions">Apply now <ArrowRight className="h-4 w-4" /></Link>
             </Button>
-            <Button asChild variant="outline" size="xl" className="bg-transparent border-accent-foreground/40 text-accent-foreground hover:bg-accent-foreground hover:text-accent">
+            <Button asChild variant="outline" size="xl" className="bg-transparent border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               <Link to="/admissions#open-days">Book a visit</Link>
             </Button>
           </div>
