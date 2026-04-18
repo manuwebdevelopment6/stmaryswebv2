@@ -12,8 +12,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"DM Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {
@@ -100,6 +100,22 @@ export default {
           "0%": { backgroundPosition: "-1000px 0" },
           "100%": { backgroundPosition: "1000px 0" },
         },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(24px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "gradient-pan": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 hsl(var(--accent) / 0.5)" },
+          "50%": { boxShadow: "0 0 0 12px hsl(var(--accent) / 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -107,6 +123,10 @@ export default {
         "fade-in-up": "fade-in-up 0.7s cubic-bezier(0.16,1,0.3,1) both",
         "fade-in": "fade-in 0.5s ease-out both",
         "bounce-soft": "bounce-soft 2s ease-in-out infinite",
+        "scale-in": "scale-in 0.4s cubic-bezier(0.16,1,0.3,1) both",
+        "slide-in-right": "slide-in-right 0.5s cubic-bezier(0.16,1,0.3,1) both",
+        "gradient-pan": "gradient-pan 8s ease infinite",
+        "pulse-glow": "pulse-glow 2.4s ease-in-out infinite",
       },
     },
   },

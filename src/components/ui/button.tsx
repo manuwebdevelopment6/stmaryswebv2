@@ -9,16 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary-glow shadow-card",
+        default: "bg-primary text-primary-foreground hover:bg-primary-glow shadow-card transition-all hover:shadow-royal hover:-translate-y-0.5",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-secondary hover:text-secondary-foreground",
+        outline: "border border-input bg-background/60 backdrop-blur-md hover:bg-secondary hover:text-secondary-foreground hover:border-primary/40",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-secondary hover:text-secondary-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        gold: "bg-gradient-gold text-accent-foreground font-semibold shadow-gold hover:opacity-95 hover:scale-[1.02] active:scale-[0.99]",
-        hero: "bg-gradient-gold text-accent-foreground font-semibold shadow-gold hover:opacity-95 hover:scale-[1.02] active:scale-[0.99] tracking-wide",
-        "hero-outline": "border-2 border-primary-foreground/70 bg-primary-foreground/5 text-primary-foreground backdrop-blur-md hover:bg-primary-foreground hover:text-primary tracking-wide",
-        forest: "bg-gradient-forest text-primary-foreground shadow-forest hover:opacity-95",
+        gold: "bg-gradient-cyan text-accent-foreground font-semibold shadow-cyan hover:shadow-glow hover:scale-[1.02] active:scale-[0.99] transition-all",
+        hero: "bg-gradient-cyan text-accent-foreground font-semibold shadow-cyan hover:shadow-glow hover:scale-[1.02] active:scale-[0.99] tracking-wide transition-all",
+        "hero-outline": "border border-primary-foreground/40 bg-primary-foreground/5 text-primary-foreground backdrop-blur-md hover:bg-primary-foreground hover:text-primary tracking-wide transition-all",
+        forest: "bg-gradient-royal text-primary-foreground shadow-royal hover:opacity-95 hover:-translate-y-0.5 transition-all",
+        aurora: "bg-gradient-aurora bg-[length:200%_200%] animate-gradient-pan text-primary-foreground font-semibold shadow-royal hover:scale-[1.02] active:scale-[0.99] transition-transform",
       },
       size: {
         default: "h-10 px-5 py-2",

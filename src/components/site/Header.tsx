@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const NAV: { label: string; to: string; children?: { label: string; to: string; desc: string }[] }[] = [
@@ -91,6 +92,7 @@ export const Header = () => {
         </nav>
 
         <div className="hidden lg:flex items-center gap-2">
+          <ThemeToggle variant={scrolled ? "default" : "light"} />
           <Button asChild variant={scrolled ? "ghost" : "hero-outline"} size="sm">
             <Link to="/portal">Portal Login</Link>
           </Button>
@@ -118,7 +120,8 @@ export const Header = () => {
                 {n.label}
               </Link>
             ))}
-            <div className="flex gap-2 pt-4">
+            <div className="flex gap-2 pt-4 items-center">
+              <ThemeToggle />
               <Button asChild variant="outline" className="flex-1"><Link to="/portal">Portal</Link></Button>
               <Button asChild variant="gold" className="flex-1"><Link to="/admissions">Apply</Link></Button>
             </div>
