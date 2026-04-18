@@ -120,7 +120,8 @@ export const Header = () => {
                 {n.label}
               </Link>
             ))}
-            <div className="flex gap-2 pt-4">
+            <div className="flex gap-2 pt-4 items-center">
+              <ThemeToggle />
               <Button asChild variant="outline" className="flex-1"><Link to="/portal">Portal</Link></Button>
               <Button asChild variant="gold" className="flex-1"><Link to="/admissions">Apply</Link></Button>
             </div>
