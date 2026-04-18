@@ -1,16 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { SiteLayout } from "@/components/site/SiteLayout";
+import { Seo } from "@/components/site/Seo";
+import { Hero } from "@/components/sections/Hero";
+import { StatsBand } from "@/components/sections/StatsBand";
+import { ResultsPreview } from "@/components/sections/ResultsPreview";
+import { SchoolLife } from "@/components/sections/SchoolLife";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { NewsTeaser } from "@/components/sections/NewsTeaser";
+import { CtaBand } from "@/components/sections/CtaBand";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
-};
-
-const Index = PlaceholderIndex;
+const Index = () => (
+  <SiteLayout>
+    <Seo
+      title="St. Mary's Senior School, Bomet — Excellence in Education since 1965"
+      description="Premier secondary boarding school in Bomet County, Kenya. KCSE results, Form 1 admissions, fees, AI assistant, and online portals for parents and students."
+      canonical={typeof window !== 'undefined' ? window.location.origin + '/' : undefined}
+    />
+    <Hero />
+    <StatsBand />
+    <ResultsPreview />
+    <SchoolLife />
+    <Testimonials />
+    <NewsTeaser />
+    <CtaBand />
+  </SiteLayout>
+);
 
 export default Index;
