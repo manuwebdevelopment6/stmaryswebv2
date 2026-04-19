@@ -118,7 +118,7 @@ export const Header = () => {
                 <Link to="/auth">Sign in</Link>
               </Button>
               <Button asChild variant="gold" size="sm">
-                <Link to="/auth?mode=signup">Apply for Form 1</Link>
+                <Link to="/admissions">Apply for Form 1</Link>
               </Button>
             </>
           )}
