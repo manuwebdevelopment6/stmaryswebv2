@@ -9,6 +9,11 @@ import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
 import Auth from "./pages/Auth.tsx";
+import Academics from "./pages/Academics.tsx";
+import Admissions from "./pages/Admissions.tsx";
+import VirtualTour from "./pages/VirtualTour.tsx";
+import SchoolLifePage from "./pages/SchoolLife.tsx";
+import News from "./pages/News.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -24,6 +29,11 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
+              <Route path="/academics" element={<Academics />} />
+              <Route path="/admissions" element={<Admissions />} />
+              <Route path="/life" element={<SchoolLifePage />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/virtual-tour" element={<VirtualTour />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/auth" element={<Auth />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
