@@ -77,18 +77,25 @@ export const Hero = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 font-display font-bold text-display-xl text-primary-foreground text-balance leading-[1.02]"
           >
-            Excellence in Education,
-            <span className="block text-gradient-aurora">
-              since 1965.
+            Excellence in
+            <span className="relative inline-block ml-3">
+              <span className="text-gradient-aurora italic">Education</span>
+              <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" fill="none" preserveAspectRatio="none">
+                <path d="M2 7 Q 50 1 100 5 T 198 4" stroke="hsl(var(--accent))" strokeWidth="3" strokeLinecap="round" fill="none" />
+              </svg>
+            </span>,
+            <span className="block mt-2">
+              <span className="text-primary-foreground/90">since </span>
+              <span className="text-gradient-aurora">1965.</span>
             </span>
           </motion.h1>
 
           <motion.p
             variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.8 }}
-            className="mt-6 max-w-xl text-base sm:text-lg text-primary-foreground/85 leading-relaxed"
+            className="mt-7 max-w-xl text-base sm:text-lg text-primary-foreground/90 leading-relaxed"
           >
-            A premier secondary boarding school in the Bomet highlands, forming young men and women of character, scholarship, and service for Kenya and the world.
+            A premier secondary boarding school in the Bomet highlands, forming young men and women of <span className="text-accent font-semibold">character</span>, <span className="text-accent font-semibold">scholarship</span>, and <span className="text-accent font-semibold">service</span> for Kenya and the world.
           </motion.p>
 
           <motion.div
