@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      applications: {
+        Row: {
+          applicant_dob: string | null
+          applicant_first_name: string | null
+          applicant_gender: string | null
+          applicant_last_name: string | null
+          applicant_nationality: string | null
+          boarding_preference: string | null
+          created_at: string
+          current_step: number
+          document_paths: Json | null
+          guardian_address: string | null
+          guardian_email: string | null
+          guardian_full_name: string | null
+          guardian_id_number: string | null
+          guardian_phone: string | null
+          guardian_relationship: string | null
+          id: string
+          intended_form: string | null
+          kcpe_index_no: string | null
+          kcpe_marks: number | null
+          kcpe_year: number | null
+          notes: string | null
+          previous_school: string | null
+          status: Database["public"]["Enums"]["application_status"]
+          submitted_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          applicant_dob?: string | null
+          applicant_first_name?: string | null
+          applicant_gender?: string | null
+          applicant_last_name?: string | null
+          applicant_nationality?: string | null
+          boarding_preference?: string | null
+          created_at?: string
+          current_step?: number
+          document_paths?: Json | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_full_name?: string | null
+          guardian_id_number?: string | null
+          guardian_phone?: string | null
+          guardian_relationship?: string | null
+          id?: string
+          intended_form?: string | null
+          kcpe_index_no?: string | null
+          kcpe_marks?: number | null
+          kcpe_year?: number | null
+          notes?: string | null
+          previous_school?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          submitted_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          applicant_dob?: string | null
+          applicant_first_name?: string | null
+          applicant_gender?: string | null
+          applicant_last_name?: string | null
+          applicant_nationality?: string | null
+          boarding_preference?: string | null
+          created_at?: string
+          current_step?: number
+          document_paths?: Json | null
+          guardian_address?: string | null
+          guardian_email?: string | null
+          guardian_full_name?: string | null
+          guardian_id_number?: string | null
+          guardian_phone?: string | null
+          guardian_relationship?: string | null
+          id?: string
+          intended_form?: string | null
+          kcpe_index_no?: string | null
+          kcpe_marks?: number | null
+          kcpe_year?: number | null
+          notes?: string | null
+          previous_school?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          submitted_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -83,6 +170,13 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "staff" | "parent" | "student" | "alumnus"
+      application_status:
+        | "draft"
+        | "submitted"
+        | "under_review"
+        | "accepted"
+        | "declined"
+        | "waitlisted"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -211,6 +305,14 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "staff", "parent", "student", "alumnus"],
+      application_status: [
+        "draft",
+        "submitted",
+        "under_review",
+        "accepted",
+        "declined",
+        "waitlisted",
+      ],
     },
   },
 } as const
