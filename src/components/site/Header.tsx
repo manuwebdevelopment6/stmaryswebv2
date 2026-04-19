@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, ChevronDown, LogOut, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
+import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const NAV: { label: string; to: string; children?: { label: string; to: string; desc: string }[] }[] = [
   { label: "About", to: "/about", children: [
@@ -32,6 +34,14 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out");
+    navigate("/");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -93,12 +103,25 @@ export const Header = () => {
 
         <div className="hidden lg:flex items-center gap-2">
           <ThemeToggle variant={scrolled ? "default" : "light"} />
-          <Button asChild variant={scrolled ? "ghost" : "hero-outline"} size="sm">
-            <Link to="/portal">Portal Login</Link>
-          </Button>
-          <Button asChild variant="gold" size="sm">
-            <Link to="/admissions">Apply for Form 1</Link>
-          </Button>
+          {user ? (
+            <>
+              <Button asChild variant={scrolled ? "ghost" : "hero-outline"} size="sm">
+                <Link to="/account"><UserIcon className="h-4 w-4" /> Account</Link>
+              </Button>
+              <Button onClick={handleSignOut} variant="gold" size="sm">
+                <LogOut className="h-4 w-4" /> Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant={scrolled ? "ghost" : "hero-outline"} size="sm">
+                <Link to="/auth">Sign in</Link>
+              </Button>
+              <Button asChild variant="gold" size="sm">
+                <Link to="/auth?mode=signup">Apply for Form 1</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         <button
@@ -122,8 +145,17 @@ export const Header = () => {
             ))}
             <div className="flex gap-2 pt-4 items-center">
               <ThemeToggle />
-              <Button asChild variant="outline" className="flex-1"><Link to="/portal">Portal</Link></Button>
-              <Button asChild variant="gold" className="flex-1"><Link to="/admissions">Apply</Link></Button>
+              {user ? (
+                <>
+                  <Button asChild variant="outline" className="flex-1"><Link to="/account">Account</Link></Button>
+                  <Button onClick={handleSignOut} variant="gold" className="flex-1">Sign out</Button>
+                </>
+              ) : (
+                <>
+                  <Button asChild variant="outline" className="flex-1"><Link to="/auth">Sign in</Link></Button>
+                  <Button asChild variant="gold" className="flex-1"><Link to="/auth?mode=signup">Sign up</Link></Button>
+                </>
+              )}
             </div>
           </nav>
         </div>
