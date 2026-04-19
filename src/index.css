@@ -66,6 +66,7 @@
     --gradient-royal: linear-gradient(135deg, hsl(224 70% 16%), hsl(222 78% 42%));
     --gradient-aurora: linear-gradient(135deg, hsl(222 85% 56%) 0%, hsl(195 92% 50%) 50%, hsl(265 85% 60%) 100%);
     --gradient-soft: linear-gradient(180deg, hsl(220 33% 98%), hsl(220 25% 95%));
+    --gradient-text-aurora: linear-gradient(135deg, hsl(222 78% 42%), hsl(195 92% 45%));
     --gradient-mesh: radial-gradient(at 20% 20%, hsl(222 85% 56% / 0.25) 0px, transparent 50%),
                      radial-gradient(at 80% 0%, hsl(195 92% 50% / 0.2) 0px, transparent 50%),
                      radial-gradient(at 0% 80%, hsl(265 85% 60% / 0.18) 0px, transparent 50%),
@@ -131,6 +132,8 @@
                      radial-gradient(at 80% 0%, hsl(188 95% 60% / 0.18) 0px, transparent 50%),
                      radial-gradient(at 0% 80%, hsl(265 85% 65% / 0.16) 0px, transparent 50%),
                      radial-gradient(at 80% 80%, hsl(188 95% 70% / 0.14) 0px, transparent 50%);
+    --gradient-soft: linear-gradient(180deg, hsl(224 47% 6%), hsl(224 38% 9%));
+    --gradient-text-aurora: linear-gradient(135deg, hsl(210 100% 75%), hsl(188 95% 70%));
 
     --shadow-glow: 0 0 0 1px hsl(188 95% 60% / 0.5), 0 0 32px hsl(188 95% 60% / 0.4);
 
@@ -191,10 +194,14 @@
   .shadow-forest { box-shadow: var(--shadow-royal); }
 
   .text-gradient-aurora {
-    background: var(--gradient-aurora);
+    background-image: var(--gradient-text-aurora);
     -webkit-background-clip: text;
     background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
+    /* Fallback so text remains visible if gradient/clip fails */
+    background-color: hsl(var(--primary));
+    padding-bottom: 0.05em;
   }
 
   .glass {
