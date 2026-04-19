@@ -20,7 +20,7 @@ const Counter = ({ stat }: { stat: Stat }) => {
   const display = stat.end < 10 ? (value / 10).toFixed(1) : value.toLocaleString();
   return (
     <div className="text-center px-2 group">
-      <div className="font-display font-bold text-4xl sm:text-5xl bg-gradient-aurora bg-[length:200%_200%] animate-gradient-pan bg-clip-text text-transparent tabular-nums">
+      <div className="font-display font-bold text-4xl sm:text-5xl text-gradient-aurora tabular-nums">
         {stat.prefix}<span ref={ref}>{display}</span>{stat.suffix}
       </div>
       <div className="mt-2 font-semibold text-sm text-foreground">{stat.label}</div>

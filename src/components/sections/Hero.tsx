@@ -78,7 +78,7 @@ export const Hero = () => {
             className="mt-6 font-display font-bold text-display-xl text-primary-foreground text-balance leading-[1.02]"
           >
             Excellence in Education,
-            <span className="block bg-gradient-aurora bg-[length:200%_200%] animate-gradient-pan bg-clip-text text-transparent">
+            <span className="block text-gradient-aurora">
               since 1965.
             </span>
           </motion.h1>
