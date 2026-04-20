@@ -1,14 +1,29 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import academics from "@/assets/life-academics.jpg";
-import sports from "@/assets/life-sports.jpg";
-import boarding from "@/assets/life-boarding.jpg";
 
 const ITEMS = [
-  { img: academics, title: "Academics", body: "Rigorous curriculum, modern science labs, and 1:18 teacher ratio.", to: "/academics" },
-  { img: sports, title: "Sports & Co-curriculars", body: "Rugby, football, hockey, athletics, music, drama and 30+ clubs.", to: "/life#sports" },
-  { img: boarding, title: "Boarding Life", body: "A safe, well-supervised home-away-from-home in the Bomet highlands.", to: "/life#boarding" },
+  {
+    img: "https://stmarysseniorschoolbomet.co.ke/images/GRADE10.jpg",
+    title: "Senior Secondary (Grade 10)",
+    body: "University-prep with specialised CBE pathways: STEM, Social Sciences, Arts & Sports.",
+    to: "/academics#senior",
+    badge: "Grade 10",
+  },
+  {
+    img: "https://stmarysseniorschoolbomet.co.ke/images/GRADE%209%20KNEC%20AGN.jpg",
+    title: "Junior Secondary (Grade 7-9)",
+    body: "Career pathway introduction and advanced skill development with mentorship.",
+    to: "/academics#junior",
+    badge: "Grade 7-9",
+  },
+  {
+    img: "https://stmarysseniorschoolbomet.co.ke/images/update_1-Bandjss.jpg",
+    title: "School Life",
+    body: "From the school band & sports to the ICT Innovation Lab — a vibrant boarding community.",
+    to: "/life",
+    badge: "Boarding",
+  },
 ];
 
 export const SchoolLife = () => (
@@ -16,13 +31,13 @@ export const SchoolLife = () => (
     <div className="container-prose">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
         <div className="max-w-2xl">
-          <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— School Life</span>
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Educational Programs</span>
           <h2 className="mt-3 font-display font-bold text-display-lg text-foreground text-balance">
-            More than a school. <span className="text-primary italic">A community.</span>
+            Complete educational <span className="text-primary italic">journey.</span>
           </h2>
         </div>
         <p className="text-muted-foreground max-w-md">
-          From the classroom to the rugby pitch to the dorm common room — every space is designed to help young people grow.
+          From Junior School through Senior Secondary — preparing learners for university and beyond, all within one nurturing campus.
         </p>
       </div>
 
@@ -44,7 +59,10 @@ export const SchoolLife = () => (
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-deep via-primary-deep/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-deep via-primary-deep/30 to-transparent" />
+                <span className="absolute top-4 left-4 text-xs font-mono font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md bg-accent text-accent-foreground">
+                  {item.badge}
+                </span>
               </div>
               <div className="absolute inset-x-0 bottom-0 p-6 text-primary-foreground">
                 <div className="flex items-end justify-between gap-3">

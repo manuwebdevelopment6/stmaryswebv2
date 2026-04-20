@@ -9,10 +9,10 @@ export const Logo = ({ variant = "default" }: LogoProps) => {
   const text = variant === "light" ? "text-primary-foreground" : "text-primary";
   const sub = variant === "light" ? "text-primary-foreground/70" : "text-muted-foreground";
   const ring = variant === "light" ? "stroke-primary-foreground" : "stroke-primary";
-  const fill = variant === "light" ? "fill-accent" : "fill-accent";
+  const fill = "fill-accent";
 
   return (
-    <Link to="/" className="inline-flex items-center gap-3 group" aria-label="St. Mary's Senior School Bomet — home">
+    <Link to="/" className="inline-flex items-center gap-3 group" aria-label="St. Mary's Mixed Junior & Senior School Bomet — home">
       <span className="relative grid h-11 w-11 place-items-center rounded-full bg-primary-deep transition-transform group-hover:scale-105">
         <svg viewBox="0 0 40 40" className="h-7 w-7" aria-hidden>
           <circle cx="20" cy="20" r="17" className={`fill-transparent ${ring}`} strokeWidth="1.5" />
@@ -20,8 +20,8 @@ export const Logo = ({ variant = "default" }: LogoProps) => {
         </svg>
       </span>
       <span className="flex flex-col leading-none">
-        <span className={`font-display text-lg font-bold ${text}`}>St.&nbsp;Mary's</span>
-        <span className={`font-mono text-[10px] uppercase tracking-[0.18em] ${sub}`}>Senior · Bomet</span>
+        <span className={`font-display text-lg font-bold ${text}`}>St.&nbsp;Mary's&nbsp;Bomet</span>
+        <span className={`font-mono text-[10px] uppercase tracking-[0.18em] ${sub}`}>Junior&nbsp;·&nbsp;Senior · Since 1990</span>
       </span>
     </Link>
   );

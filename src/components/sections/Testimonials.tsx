@@ -3,25 +3,24 @@ import { Quote } from "lucide-react";
 
 const QUOTES = [
   {
-    body: "St. Mary's gave my son confidence as well as grades. He came home from Form 4 not just an A-student, but a young man ready for the world.",
-    name: "Wanjiru K.",
-    role: "Parent · Form 4 leaver, 2024",
+    body: "St. Mary's has transformed my daughter's approach to learning. The CBE program has given her confidence and critical thinking skills that will serve her well in university.",
+    name: "Ann Jepngetich",
+    role: "Parent of Grade 9 student",
   },
   {
-    body: "The teachers stay late, mark our work the same week, and actually know us by name. That makes all the difference at the boarding house.",
-    name: "Brian C.",
-    role: "Form 3 student",
+    body: "At St. Mary's, we firmly believe that education is the foundation of a strong and prosperous society. Guided by the Competency-Based Curriculum, we provide academic excellence, life skills, innovation and character formation.",
+    name: "Dr. Alexander R.",
+    role: "Chair, Board of Management",
   },
   {
-    body: "I joined as a shy KCPE candidate and left as Head Girl. The clubs, the sports, the pastoral care — it all shaped who I am at university today.",
-    name: "Faith J.",
-    role: "Alumna, University of Nairobi",
+    body: "Every child has unique talents waiting to be discovered. Our team works tirelessly to create an environment where students thrive academically, socially and spiritually — from Junior School through Grade 10.",
+    name: "Sr. Dr. Mary Gabriel C.",
+    role: "Principal",
   },
 ];
 
 export const Testimonials = () => (
   <section className="py-24 sm:py-32 bg-primary-deep text-primary-foreground relative overflow-hidden">
-    {/* Layered atmosphere */}
     <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
     <div className="absolute inset-0 pattern-dots opacity-30" />
     <div className="aurora-orb h-[420px] w-[420px] -left-32 top-10 bg-primary-glow opacity-30" />

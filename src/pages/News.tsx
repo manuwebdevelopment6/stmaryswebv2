@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Calendar, Search, ArrowRight } from "lucide-react";
 
 const ARTICLES = [
-  { cat: "Achievement", date: "12 March 2025", title: "St. Mary's posts best-ever KCSE mean of 9.2", excerpt: "The 2024 cohort delivered a B+ mean grade — the school's strongest performance in over a decade.", slug: "kcse-2024-results" },
-  { cat: "Sports", date: "28 February 2025", title: "Rugby 1st XV crowned South Rift champions", excerpt: "An undefeated season culminates in a 24–17 final victory over Kericho Boys at Sotik Showground.", slug: "rugby-south-rift-2025" },
-  { cat: "Admissions", date: "15 February 2025", title: "Form 1 2026 applications now open", excerpt: "Online applications and KCPE cut-off updates — apply by 30 September for early consideration.", slug: "form-1-2026-open" },
-  { cat: "Academics", date: "30 January 2025", title: "Three students place in Top 100 nationally", excerpt: "Three of our 2024 KCSE candidates earned places among the country's Top 100 by mean score.", slug: "top-100-2024" },
-  { cat: "Community", date: "20 January 2025", title: "Outreach: 200 trees planted with Bomet County", excerpt: "Form 3 environmental club partnered with the county forester for a campus and town greening day.", slug: "tree-planting-2025" },
-  { cat: "Arts", date: "10 December 2024", title: "Drama club wins regional festival", excerpt: "A powerful performance of \"Mwananchi\" earns the troupe a national qualifier slot.", slug: "drama-regionals-2024" },
+  { cat: "Academic", date: "12 July 2025", img: "https://stmarysseniorschoolbomet.co.ke/images/Grade%207%20agric.jpg", title: "Grade 7 Learners Excel in Agriculture Assessment", excerpt: "Grade 7 students showcased creativity and hands-on skills during their CBC Agriculture practical assessment.", author: "Academic Department" },
+  { cat: "Community", date: "5 July 2025", img: "https://stmarysseniorschoolbomet.co.ke/images/band2.jpg", title: "Band Represents School at Catholic Youth Rally", excerpt: "The school band proudly represented St. Mary's at the Catholic Diocese of Kericho Youth Rally 2025.", author: "Chaplaincy" },
+  { cat: "Sports", date: "27 March 2025", img: "https://stmarysseniorschoolbomet.co.ke/images/band1.jpg", title: "School Band Shines at Rift Valley Regional Sports", excerpt: "Our talented school band added colour and pride to the Rift Valley Regional Sports gala.", author: "Co-Curricular Office" },
+  { cat: "Achievement", date: "14 March 2024", img: "https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=600", title: "Outstanding KCSE Results 2024", excerpt: "Form 4 students achieved exceptional results in the KCSE examinations, with 65% University Transition.", author: "Academic Department" },
+  { cat: "Achievement", date: "9 March 2024", img: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=600", title: "Science Fair Competition Winners", excerpt: "St. Mary's students dominated the county science fair, winning first place in three categories including environmental science and tech innovation.", author: "Science Department" },
+  { cat: "Infrastructure", date: "4 March 2024", img: "https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg?auto=compress&cs=tinysrgb&w=600", title: "New ICT Innovation Lab Opening", excerpt: "State-of-the-art ICT lab officially opened, featuring 40 modern computers and high-speed internet to enhance digital literacy.", author: "Principal" },
+  { cat: "Sports", date: "27 February 2024", img: "https://images.pexels.com/photos/2105028/pexels-photo-2105028.jpeg?auto=compress&cs=tinysrgb&w=600", title: "Inter-School Sports Championships", excerpt: "Our athletics team brought home 12 medals from the regional inter-school sports championships, including 5 gold.", author: "Sports Department" },
+  { cat: "Academic", date: "20 February 2024", img: "https://stmarysseniorschoolbomet.co.ke/images/GRADE10.jpg", title: "New Languages Introduced — French, German & Indigenous", excerpt: "St. Mary's expands its CBC pathways with new foreign and indigenous language programs.", author: "Languages Dept" },
 ];
 
-const CATS = ["All", "Achievement", "Sports", "Admissions", "Academics", "Community", "Arts"];
+const CATS = ["All", "Academic", "Achievement", "Infrastructure", "Sports", "Community"];
 
 const CAT_STYLES: Record<string, string> = {
+  Academic: "bg-primary/10 text-primary",
   Achievement: "bg-grade-a/10 text-grade-a",
-  Sports: "bg-info/10 text-info",
-  Admissions: "bg-accent/15 text-accent",
-  Academics: "bg-primary/10 text-primary",
+  Infrastructure: "bg-info/10 text-info",
+  Sports: "bg-warning/10 text-warning",
   Community: "bg-success/10 text-success",
-  Arts: "bg-warning/10 text-warning",
 };
 
 const News = () => {
@@ -37,50 +37,37 @@ const News = () => {
   return (
     <SiteLayout>
       <Seo
-        title="News & Announcements — St. Mary's Senior School Bomet"
-        description="Latest news, achievements, and announcements from St. Mary's Senior School Bomet — KCSE results, sports, admissions and community stories."
+        title="School News & Events — St. Mary's Bomet"
+        description="Latest happenings, achievements and events at St. Mary's Mixed Junior & Senior School Bomet — KCSE results, sports, music band, ICT lab and community stories."
       />
 
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
         <div className="container-prose relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">— News</span>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">— School News</span>
             <h1 className="mt-3 font-display font-bold text-display-xl text-balance">
               Stories from <span className="text-gradient-aurora italic">campus</span>.
             </h1>
             <p className="mt-5 text-lg text-primary-foreground/85 max-w-xl">
-              Achievements, announcements, and the everyday life of the Marian community.
+              Stay updated with the latest happenings, achievements and events at St. Mary's School.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Filters */}
       <section className="py-10 bg-background border-b border-border sticky top-20 z-30 backdrop-blur-md bg-background/85">
         <div className="container-prose flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
           <div className="flex flex-wrap gap-2">
             {CATS.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCat(c)}
-                className={`text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all ${
-                  cat === c ? "bg-gradient-cyan text-accent-foreground shadow-cyan" : "bg-secondary text-secondary-foreground hover:bg-muted"
-                }`}
-              >
+              <button key={c} onClick={() => setCat(c)} className={`text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all ${cat === c ? "bg-gradient-cyan text-accent-foreground shadow-cyan" : "bg-secondary text-secondary-foreground hover:bg-muted"}`}>
                 {c}
               </button>
             ))}
           </div>
           <div className="relative w-full md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              maxLength={100}
-              placeholder="Search stories…"
-              className="w-full h-10 pl-9 pr-3 rounded-lg border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-            />
+            <input value={q} onChange={(e) => setQ(e.target.value)} maxLength={100} placeholder="Search stories…" className="w-full h-10 pl-9 pr-3 rounded-lg border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
           </div>
         </div>
       </section>
@@ -92,25 +79,22 @@ const News = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((a, i) => (
-                <motion.article
-                  key={a.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="group rounded-2xl border border-border bg-card p-7 hover-lift"
-                >
-                  <div className="flex items-center gap-3 mb-5">
-                    <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${CAT_STYLES[a.cat]}`}>{a.cat}</span>
-                    <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5"><Calendar className="h-3 w-3" /> {a.date}</span>
+                <motion.article key={a.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: i * 0.04 }} className="group rounded-2xl border border-border bg-card overflow-hidden hover-lift">
+                  <div className="aspect-[16/10] overflow-hidden bg-muted">
+                    <img src={a.img} alt={a.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">
-                    <Link to={`/news/${a.slug}`}>{a.title}</Link>
-                  </h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{a.excerpt}</p>
-                  <Link to={`/news/${a.slug}`} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
-                    Read more <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${CAT_STYLES[a.cat]}`}>{a.cat}</span>
+                      <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5"><Calendar className="h-3 w-3" /> {a.date}</span>
+                    </div>
+                    <h3 className="font-display text-xl font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">{a.title}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{a.excerpt}</p>
+                    <div className="mt-5 flex items-center justify-between">
+                      <span className="text-xs font-mono text-muted-foreground">{a.author}</span>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">Read more <ArrowRight className="h-3.5 w-3.5" /></span>
+                    </div>
+                  </div>
                 </motion.article>
               ))}
             </div>

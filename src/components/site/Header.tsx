@@ -10,19 +10,21 @@ import { toast } from "sonner";
 
 const NAV: { label: string; to: string; children?: { label: string; to: string; desc: string }[] }[] = [
   { label: "About", to: "/about", children: [
-    { label: "Our Story", to: "/about", desc: "History, mission and vision" },
-    { label: "Leadership", to: "/about#leadership", desc: "Board, principal & deputies" },
-    { label: "Accreditations", to: "/about#accreditations", desc: "KNEC, KSSHA, MoE" },
+    { label: "Our Story", to: "/about", desc: "Founded 1990 by the Catholic Diocese" },
+    { label: "Mission & Vision", to: "/about#mission", desc: "God-centered, holistic learning" },
+    { label: "Leadership Team", to: "/about#leadership", desc: "Principal, deputies & HODs" },
+    { label: "BOM Message", to: "/about#bom", desc: "From the Board of Management" },
   ]},
   { label: "Academics", to: "/academics", children: [
-    { label: "Curriculum", to: "/academics", desc: "8-4-4 + KCSE pathways" },
-    { label: "KCSE Results", to: "/academics#results", desc: "10-year mean scores" },
-    { label: "University Placements", to: "/academics#placements", desc: "Where graduates go" },
+    { label: "CBE Curriculum", to: "/academics", desc: "Competency-Based Education" },
+    { label: "Career Pathways", to: "/academics#pathways", desc: "STEM · Social Sciences · Arts & Sports" },
+    { label: "Junior Secondary", to: "/academics#junior", desc: "Grade 7 – 9" },
+    { label: "Senior Secondary", to: "/academics#senior", desc: "Grade 10 specialisation" },
   ]},
   { label: "Admissions", to: "/admissions", children: [
-    { label: "How to Apply", to: "/admissions", desc: "Step-by-step guide" },
-    { label: "Fee Structure", to: "/admissions#fees", desc: "Termly breakdown" },
-    { label: "Open Days", to: "/admissions#open-days", desc: "Visit the campus" },
+    { label: "How to Apply", to: "/admissions", desc: "4-step online application" },
+    { label: "Fee Information", to: "/admissions#fees", desc: "Termly structure & registration" },
+    { label: "Open Days", to: "/admissions#open-days", desc: "Entrance interviews" },
   ]},
   { label: "School Life", to: "/life" },
   { label: "News", to: "/news" },
@@ -118,7 +120,7 @@ export const Header = () => {
                 <Link to="/auth">Sign in</Link>
               </Button>
               <Button asChild variant="gold" size="sm">
-                <Link to="/admissions">Apply for Form 1</Link>
+                <Link to="/admissions">Apply for Grade 7-10</Link>
               </Button>
             </>
           )}
