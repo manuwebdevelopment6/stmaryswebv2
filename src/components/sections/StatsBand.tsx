@@ -9,19 +9,18 @@ interface Stat {
 }
 
 const STATS: Stat[] = [
-  { end: 9.2, suffix: "", label: "KCSE Mean", sub: "2024 cohort (B+)" },
-  { end: 60, suffix: "+", label: "Years", sub: "of academic legacy" },
-  { end: 1240, label: "Students", sub: "Forms 1 – 4" },
-  { end: 96, suffix: "%", label: "University", sub: "placement rate" },
+  { end: 500, suffix: "+", label: "Students", sub: "Grade 7 – 10 + Form 3-4" },
+  { end: 25, suffix: "+", label: "Teachers", sub: "Dedicated & qualified" },
+  { end: 35, suffix: "+", label: "Years", sub: "Of excellence since 1990" },
+  { end: 98, suffix: "%", label: "University", sub: "Admission rate" },
 ];
 
 const Counter = ({ stat }: { stat: Stat }) => {
-  const { ref, value } = useCountUp(Math.floor(stat.end * (stat.end < 10 ? 10 : 1)), 1600);
-  const display = stat.end < 10 ? (value / 10).toFixed(1) : value.toLocaleString();
+  const { ref, value } = useCountUp(stat.end, 1600);
   return (
     <div className="text-center px-2 group">
       <div className="font-display font-bold text-4xl sm:text-5xl text-gradient-aurora tabular-nums">
-        {stat.prefix}<span ref={ref}>{display}</span>{stat.suffix}
+        {stat.prefix}<span ref={ref}>{value.toLocaleString()}</span>{stat.suffix}
       </div>
       <div className="mt-2 font-semibold text-sm text-foreground">{stat.label}</div>
       <div className="text-xs text-muted-foreground mt-0.5">{stat.sub}</div>

@@ -11,14 +11,14 @@ import { CtaBand } from "@/components/sections/CtaBand";
 const Index = () => (
   <SiteLayout>
     <Seo
-      title="St. Mary's Senior School, Bomet — Excellence in Education since 1965"
-      description="Premier secondary boarding school in Bomet County, Kenya. KCSE results, Form 1 admissions, fees, AI assistant, and online portals for parents and students."
+      title="St. Mary's Mixed Junior & Senior School, Bomet — CBE Excellence Since 1990"
+      description="A Catholic Diocese of Kericho school offering exceptional CBE education from Grade 7 through Grade 10. 500+ students, 98% university admission, 35+ years of excellence in Bomet."
       canonical={typeof window !== 'undefined' ? window.location.origin + '/' : undefined}
     />
     <Hero />
     <StatsBand />
-    <ResultsPreview />
     <SchoolLife />
+    <ResultsPreview />
     <Testimonials />
     <NewsTeaser />
     <CtaBand />

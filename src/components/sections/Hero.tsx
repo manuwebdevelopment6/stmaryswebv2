@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, Play, ChevronDown, Sparkles, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroCampus from "@/assets/hero-campus.jpg";
 
 export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -34,19 +33,17 @@ export const Hero = () => {
         className="absolute inset-0"
       >
         <img
-          src={heroCampus}
-          alt="Aerial view of St. Mary's Senior School campus in Bomet at golden hour"
+          src="https://stmarysseniorschoolbomet.co.ke/images/students1.jpg"
+          alt="St. Mary's Mixed Junior & Senior School Bomet — students on campus"
           className="h-full w-full object-cover"
           fetchPriority="high"
         />
       </motion.div>
 
-      {/* Gradient + mesh + grid */}
       <div className="absolute inset-0 bg-gradient-hero" />
       <div className="absolute inset-0 bg-gradient-mesh opacity-80" />
       <div className="absolute inset-0 pattern-grid opacity-30" />
 
-      {/* Aurora floating orbs (mouse-reactive) */}
       <div
         className="aurora-orb h-[420px] w-[420px] -left-32 top-20 bg-primary-glow"
         style={{ transform: `translate(${mouse.x}px, ${mouse.y}px)` }}
@@ -69,7 +66,7 @@ export const Hero = () => {
             className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/20 bg-primary-foreground/5 px-4 py-1.5 text-xs font-medium text-primary-foreground backdrop-blur-md ring-1 ring-accent/30"
           >
             <Sparkles className="h-3 w-3 text-accent animate-pulse" />
-            Form 1 Admissions 2026 — Now Open
+            35+ Years of Educational Excellence · Admissions Grade 7-10 · 2026
           </motion.span>
 
           <motion.h1
@@ -77,17 +74,14 @@ export const Hero = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 font-display font-bold text-display-xl text-primary-foreground text-balance leading-[1.02]"
           >
-            Excellence in
+            Shaping Tomorrow's
             <span className="relative inline-block ml-3">
-              <span className="text-gradient-aurora italic">Education</span>
+              <span className="text-gradient-aurora italic">Leaders</span>
               <svg className="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 200 10" fill="none" preserveAspectRatio="none">
                 <path d="M2 7 Q 50 1 100 5 T 198 4" stroke="hsl(var(--accent))" strokeWidth="3" strokeLinecap="round" fill="none" />
               </svg>
-            </span>,
-            <span className="block mt-2">
-              <span className="text-primary-foreground/90">since </span>
-              <span className="text-gradient-aurora">1965.</span>
             </span>
+            <span className="block mt-2 text-primary-foreground/90">Today.</span>
           </motion.h1>
 
           <motion.p
@@ -95,7 +89,7 @@ export const Hero = () => {
             transition={{ duration: 0.8 }}
             className="mt-7 max-w-xl text-base sm:text-lg text-primary-foreground/90 leading-relaxed"
           >
-            A premier secondary boarding school in the Bomet highlands, forming young men and women of <span className="text-accent font-semibold">character</span>, <span className="text-accent font-semibold">scholarship</span>, and <span className="text-accent font-semibold">service</span> for Kenya and the world.
+            At St. Mary's Mixed Junior &amp; Senior School — Bomet, we deliver exceptional <span className="text-accent font-semibold">CBE education</span> from <span className="text-accent font-semibold">Grade 7</span> through <span className="text-accent font-semibold">Grade 10</span>, nurturing academic excellence, character development and lifelong learning.
           </motion.p>
 
           <motion.div
@@ -105,19 +99,29 @@ export const Hero = () => {
           >
             <Button asChild variant="hero" size="xl" className="animate-pulse-glow">
               <Link to="/admissions">
-                Apply for Form 1 <ArrowRight className="h-4 w-4" />
+                Apply Now <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="hero-outline" size="xl">
               <Link to="/virtual-tour">
-                <Play className="h-4 w-4" /> Take a Virtual Tour
+                <Play className="h-4 w-4" /> Virtual Tour
               </Link>
             </Button>
+          </motion.div>
+
+          {/* Quick contacts */}
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+            transition={{ duration: 0.8 }}
+            className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-primary-foreground/80"
+          >
+            <a href="tel:+254721771568" className="inline-flex items-center gap-2 hover:text-accent transition-colors"><Phone className="h-4 w-4 text-accent" /> +254 721 771 568</a>
+            <a href="mailto:stmaryssecbomet@gmail.com" className="inline-flex items-center gap-2 hover:text-accent transition-colors"><Mail className="h-4 w-4 text-accent" /> stmaryssecbomet@gmail.com</a>
+            <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-accent" /> Bomet, Kenya</span>
           </motion.div>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         style={{ opacity }}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-primary-foreground/70"
