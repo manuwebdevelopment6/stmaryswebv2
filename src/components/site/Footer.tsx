@@ -6,29 +6,28 @@ const cols = [
   { title: "Quick Links", links: [
     { label: "About Us", to: "/about" },
     { label: "Admissions", to: "/admissions" },
-    { label: "Fee Structure", to: "/admissions#fees" },
+    { label: "Fee Information", to: "/admissions#fees" },
     { label: "Open Days", to: "/admissions#open-days" },
     { label: "Virtual Tour", to: "/virtual-tour" },
   ]},
   { title: "Academics", links: [
-    { label: "Curriculum", to: "/academics" },
-    { label: "KCSE Results", to: "/academics#results" },
-    { label: "University Placements", to: "/academics#placements" },
-    { label: "Library & Resources", to: "/academics#library" },
+    { label: "CBE Curriculum", to: "/academics" },
+    { label: "Career Pathways", to: "/academics#pathways" },
+    { label: "Junior Secondary (G7-9)", to: "/academics#junior" },
+    { label: "Senior Secondary (G10)", to: "/academics#senior" },
   ]},
   { title: "School Life", links: [
     { label: "Boarding", to: "/life#boarding" },
-    { label: "Sports", to: "/life#sports" },
-    { label: "Clubs", to: "/life#clubs" },
-    { label: "Gallery", to: "/life#gallery" },
-    { label: "Alumni", to: "/alumni" },
+    { label: "Sports & Music Band", to: "/life#sports" },
+    { label: "Clubs & Arts", to: "/life#clubs" },
+    { label: "ICT Innovation Lab", to: "/life#ict" },
+    { label: "News & Events", to: "/news" },
   ]},
 ];
 
 export const Footer = () => {
   return (
     <footer className="relative bg-primary-deep text-primary-foreground overflow-hidden">
-      {/* Top accent rule */}
       <div className="h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
       <div className="absolute inset-0 bg-gradient-mesh opacity-25 pointer-events-none" />
       <div className="absolute -top-32 left-1/4 aurora-orb h-[320px] w-[320px] bg-primary-glow opacity-20" />
@@ -38,12 +37,12 @@ export const Footer = () => {
           <div className="lg:col-span-2">
             <Logo variant="light" />
             <p className="mt-5 max-w-sm text-sm text-primary-foreground/75 leading-relaxed">
-              Excellence in education since <span className="text-accent font-semibold">1965</span>. Forming young leaders of character, scholarship, and service in the Bomet highlands.
+              Excellence in education since <span className="text-accent font-semibold">1990</span>. A Catholic Diocese of Kericho school nurturing learners from Junior School through Grade 10 in the Bomet highlands.
             </p>
             <div className="mt-6 space-y-2.5 text-sm text-primary-foreground/85">
-              <p className="flex items-start gap-2.5"><MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" /> P.O. Box 24, Bomet 20400, Kenya</p>
-              <p className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-accent" /> +254 700 000 000</p>
-              <p className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-accent" /> info@stmarysbomet.ac.ke</p>
+              <p className="flex items-start gap-2.5"><MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" /> P.O. Box 329-20300, Bomet, Kenya</p>
+              <p className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-accent" /> +254 721 771 568</p>
+              <p className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-accent" /> stmaryssecbomet@gmail.com</p>
             </div>
             <div className="mt-7 flex gap-3">
               {[Facebook, Instagram, Youtube].map((Icon, i) => (
@@ -71,11 +70,11 @@ export const Footer = () => {
 
       <div className="border-t border-primary-foreground/10 relative">
         <div className="container-prose py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
-          <p>© {new Date().getFullYear()} <span className="text-primary-foreground/90 font-medium">St. Mary's Senior School, Bomet</span>. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} <span className="text-primary-foreground/90 font-medium">St. Mary's Mixed Junior & Senior School, Bomet</span> · A Catholic Diocese of Kericho institution.</p>
           <div className="flex gap-5">
             <Link to="/privacy" className="hover:text-accent transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-accent transition-colors">Terms</Link>
-            <a href="#" className="hover:text-accent transition-colors">Sitemap</a>
+            <Link to="/contact" className="hover:text-accent transition-colors">Contact</Link>
           </div>
         </div>
       </div>
