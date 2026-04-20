@@ -42,8 +42,9 @@ const STEPS = [
 ];
 
 const FEES = [
-  { row: "Boarding (Form 1–4)", t1: "32,500", t2: "27,500", t3: "20,500", total: "80,500" },
-  { row: "Day Scholar", t1: "12,500", t2: "10,500", t3: "8,500", total: "31,500" },
+  { row: "Registration (one-time)", t1: "1,000", t2: "—", t3: "—", total: "1,000" },
+  { row: "Boarding (Grade 7-10)", t1: "Contact", t2: "Contact", t3: "Contact", total: "On request" },
+  { row: "Day Scholar", t1: "Contact", t2: "Contact", t3: "Contact", total: "On request" },
 ];
 
 const Admissions = () => {
@@ -91,8 +92,8 @@ const Admissions = () => {
   return (
     <SiteLayout>
       <Seo
-        title="Form 1 Admissions 2026 — Apply Online | St. Mary's Bomet"
-        description="Apply for Form 1 at St. Mary's Senior School Bomet. Multi-step online application, KCPE upload, fee structure, and open day booking."
+        title="Admissions Grade 7-10 (2026) — Apply Online | St. Mary's Bomet"
+        description="Apply for Grade 7, 8, 9 or 10 at St. Mary's Mixed Junior & Senior School Bomet. Multi-step online application, document upload, fee info and entrance interview booking."
       />
 
       {/* Hero */}
@@ -103,17 +104,17 @@ const Admissions = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-3xl">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">— Admissions 2026</span>
             <h1 className="mt-3 font-display font-bold text-display-xl text-balance">
-              Apply for <span className="text-gradient-aurora italic">Form 1</span>.
+              Apply for <span className="text-gradient-aurora italic">Grade 7-10</span>.
             </h1>
             <p className="mt-6 text-lg text-primary-foreground/85 max-w-xl">
-              Online applications take about 10 minutes. You can save and return at any time. Early applications close <span className="text-accent font-semibold">30 September 2025</span>.
+              Join our vibrant school community. Online applications take ~10 minutes and save automatically. Rolling admissions — apply anytime. Terms begin <span className="text-accent font-semibold">January, May & September</span>.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button onClick={startNew} variant="hero" size="xl" disabled={busy || authLoading}>
                 {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Plus className="h-4 w-4" /> Start application</>}
               </Button>
               <Button asChild variant="hero-outline" size="xl">
-                <a href="#fees">View fee structure</a>
+                <a href="#fees">View fee information</a>
               </Button>
             </div>
           </motion.div>
@@ -188,9 +189,9 @@ const Admissions = () => {
       <section id="fees" className="py-24 bg-gradient-soft">
         <div className="container-prose">
           <div className="max-w-2xl mb-10">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Fee Structure 2026</span>
-            <h2 className="mt-3 font-display font-bold text-display-lg text-foreground text-balance">Transparent termly fees.</h2>
-            <p className="mt-4 text-muted-foreground">All amounts in Kenya Shillings (KES). Includes tuition, lunch, and standard activities.</p>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Fee Information</span>
+            <h2 className="mt-3 font-display font-bold text-display-lg text-foreground text-balance">Transparent &amp; affordable.</h2>
+            <p className="mt-4 text-muted-foreground">Termly fees are payable at the beginning of each term. Contact the finance office for the current detailed structure.</p>
           </div>
           <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-card">
             <table className="w-full text-sm">
@@ -200,7 +201,7 @@ const Admissions = () => {
                   <th className="text-right p-4 font-semibold">Term 1</th>
                   <th className="text-right p-4 font-semibold">Term 2</th>
                   <th className="text-right p-4 font-semibold">Term 3</th>
-                  <th className="text-right p-4 font-semibold">Annual Total</th>
+                  <th className="text-right p-4 font-semibold">Annual</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -216,27 +217,58 @@ const Admissions = () => {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground mt-4">
-            Bursaries available for high-performing candidates from disadvantaged backgrounds — apply via the form.
-          </p>
+          <ul className="mt-6 grid sm:grid-cols-2 gap-2 text-sm text-muted-foreground">
+            <li>• Registration fee: KES 1,000 (one-time payment)</li>
+            <li>• Uniform and books are additional</li>
+            <li>• Payment plans available on request</li>
+            <li>• Scholarships available for exceptional students</li>
+            <li>• Multiple payment methods accepted</li>
+            <li>• All applications reviewed within 24 hours</li>
+          </ul>
+
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <h3 className="font-display text-lg font-semibold text-foreground">Required Documents</h3>
+              <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
+                <li>• Completed application form</li>
+                <li>• Birth certificate (original &amp; copy)</li>
+                <li>• Previous school report cards</li>
+                <li>• Transfer certificate (if applicable)</li>
+                <li>• Medical certificate</li>
+                <li>• 4 passport-size photographs</li>
+                <li>• Parent/Guardian ID copies</li>
+                <li>• KJSEA Results (Grade 10 applicants)</li>
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <h3 className="font-display text-lg font-semibold text-foreground">Important Dates</h3>
+              <ul className="mt-3 space-y-3 text-sm">
+                <li><span className="font-semibold text-foreground">Application Deadline:</span> <span className="text-muted-foreground">Rolling admissions — apply anytime</span></li>
+                <li><span className="font-semibold text-foreground">Term Starts:</span> <span className="text-muted-foreground">January, May, September</span></li>
+                <li><span className="font-semibold text-foreground">Grade 10 Entrance Exam:</span> <span className="text-muted-foreground">December &amp; March sessions</span></li>
+                <li><span className="font-semibold text-foreground">Term 1 (2026):</span> <span className="text-muted-foreground">5 January 2026</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Open days */}
+      {/* Open days / Entrance interviews */}
       <section id="open-days" className="py-24 bg-background">
         <div className="container-prose grid lg:grid-cols-2 gap-10">
           <div>
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Open Days</span>
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Entrance Interviews</span>
             <h2 className="mt-3 font-display font-bold text-display-lg text-foreground text-balance">Visit before you apply.</h2>
             <p className="mt-4 text-muted-foreground max-w-md">
-              Walk the campus, meet the principal, sit in on a class, and see the boarding houses for yourself.
+              Walk the campus, meet the principal, sit in on a class and see the boarding houses for yourself. Book your slot early.
             </p>
           </div>
           <div className="space-y-3">
             {[
-              { d: "Sat 12 Jul 2025", t: "9 am – 1 pm", n: "Form 1 prospective parents" },
-              { d: "Sat 9 Aug 2025", t: "9 am – 1 pm", n: "Form 1 prospective parents" },
-              { d: "Sat 13 Sep 2025", t: "9 am – 1 pm", n: "Final open day before deadline" },
+              { d: "Sat 8 Nov 2025", t: "9 am – 3 pm", n: "Entrance Interviews — Session 1" },
+              { d: "Sat 15 Nov 2025", t: "9 am – 3 pm", n: "Entrance Interviews — Session 2" },
+              { d: "Sat 22 Nov 2025", t: "9 am – 3 pm", n: "Entrance Interviews — Session 3" },
+              { d: "Mon 5 Jan 2026", t: "7 am", n: "Term 1 Begins — 2026" },
             ].map((o) => (
               <div key={o.d} className="rounded-xl border border-border bg-card p-5 flex items-center justify-between hover-lift">
                 <div>
