@@ -26,8 +26,19 @@ const NAV: { label: string; to: string; children?: { label: string; to: string; 
     { label: "Fee Information", to: "/admissions#fees", desc: "Termly structure & registration" },
     { label: "Open Days", to: "/admissions#open-days", desc: "Entrance interviews" },
   ]},
-  { label: "School Life", to: "/life" },
+  { label: "School Life", to: "/life", children: [
+    { label: "Boarding & Houses", to: "/life#boarding", desc: "Safe home in the highlands" },
+    { label: "Sports & Music", to: "/life#sports", desc: "National Finals music band" },
+    { label: "Clubs & Arts", to: "/life#clubs", desc: "Debate, drama, science congress" },
+    { label: "ICT Innovation Lab", to: "/life#ict", desc: "Digital skills & coding" },
+    { label: "Gallery", to: "/gallery", desc: "Photos & event highlights" },
+  ]},
   { label: "News", to: "/news" },
+  { label: "Resources", to: "/exam-downloads", children: [
+    { label: "Exam Downloads", to: "/exam-downloads", desc: "Past papers & marking schemes" },
+    { label: "Student Portal", to: "/portal", desc: "Results, timetables & fees" },
+    { label: "Virtual Tour", to: "/virtual-tour", desc: "Walk the campus online" },
+  ]},
   { label: "Contact", to: "/contact" },
 ];
 

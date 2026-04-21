@@ -21,7 +21,14 @@ const cols = [
     { label: "Sports & Music Band", to: "/life#sports" },
     { label: "Clubs & Arts", to: "/life#clubs" },
     { label: "ICT Innovation Lab", to: "/life#ict" },
+    { label: "Gallery", to: "/gallery" },
     { label: "News & Events", to: "/news" },
+  ]},
+  { title: "Resources", links: [
+    { label: "Exam Downloads", to: "/exam-downloads" },
+    { label: "Student Portal", to: "/portal" },
+    { label: "Virtual Tour", to: "/virtual-tour" },
+    { label: "Contact", to: "/contact" },
   ]},
 ];
 
