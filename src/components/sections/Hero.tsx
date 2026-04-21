@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Play, ChevronDown, Sparkles, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BreakingNewsTicker } from "./BreakingNewsTicker";
 
 export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -53,7 +54,12 @@ export const Hero = () => {
         style={{ transform: `translate(${-mouse.x}px, ${-mouse.y}px)`, animationDelay: "3s" }}
       />
 
-      <motion.div style={{ y: yText, opacity }} className="container-prose relative z-10 pt-28 pb-24 lg:pt-32">
+      {/* Breaking news ticker */}
+      <div className="absolute top-20 sm:top-24 left-0 right-0 z-20">
+        <BreakingNewsTicker />
+      </div>
+
+      <motion.div style={{ y: yText, opacity }} className="container-prose relative z-10 pt-40 pb-24 lg:pt-44">
         <motion.div
           initial="hidden"
           animate="show"
