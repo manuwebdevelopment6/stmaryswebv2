@@ -341,7 +341,7 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
     setSaving(true);
     const { error } = await supabase
       .from("applications")
-      .update({ ...stripMeta(data), status: "submitted", current_step: 4 })
+      .update({ ...stripMeta(data), status: "submitted", current_step: 5 })
       .eq("id", app.id);
     setSaving(false);
     if (error) return toast.error(error.message);
