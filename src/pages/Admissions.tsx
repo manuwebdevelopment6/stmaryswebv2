@@ -66,7 +66,7 @@ const Admissions = () => {
       .eq("user_id", user.id)
       .order("updated_at", { ascending: false });
     if (error) toast.error(error.message);
-    setApps((data ?? []) as App[]);
+    setApps((data ?? []) as unknown as App[]);
   };
 
   useEffect(() => { fetchApps(); /* eslint-disable-next-line */ }, [user]);
@@ -81,7 +81,7 @@ const Admissions = () => {
       .single();
     setBusy(false);
     if (error) return toast.error(error.message);
-    setEditing(data as App);
+    setEditing(data as unknown as App);
     fetchApps();
   };
 
@@ -166,7 +166,7 @@ const Admissions = () => {
                             : "Untitled application"}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          Updated {new Date(a.updated_at).toLocaleString()} · Step {a.current_step}/4
+                          Updated {new Date(a.updated_at).toLocaleString()} · Step {a.current_step}/5
                         </div>
                       </div>
                       <StatusBadge status={a.status} />
