@@ -423,6 +423,14 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
           </Section>
         )}
         {step === 4 && (
+          <Section title="Supporting documents">
+            <p className="text-sm text-muted-foreground -mt-3 mb-5">
+              Upload scans or photos of: birth certificate, KCPE/KJSEA result slip, last school report, passport photo, guardian ID. PDF, JPG or PNG, max 10MB each. Documents are private — only you and school staff can view them.
+            </p>
+            <DocumentUploader app={app} data={data} setData={setData} />
+          </Section>
+        )}
+        {step === 5 && (
           <Section title="Review & submit">
             <ReviewBlock title="Applicant" rows={[
               ["Name", `${data.applicant_first_name ?? ""} ${data.applicant_last_name ?? ""}`.trim() || "—"],
@@ -442,6 +450,9 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
               ["Email", data.guardian_email ?? "—"],
               ["Address", data.guardian_address ?? "—"],
             ]} />
+            <ReviewBlock title="Documents" rows={[
+              ["Files attached", `${data.document_paths?.length ?? 0} file(s)`],
+            ]} />
             <p className="mt-6 text-xs text-muted-foreground">
               By submitting, you confirm the information is accurate. We'll contact your guardian within 5 working days.
             </p>
@@ -457,12 +468,12 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
                 <ArrowLeft className="h-4 w-4" /> Back
               </Button>
             )}
-            {step < 4 && (
+            {step < 5 && (
               <Button variant="default" onClick={next} disabled={saving}>
                 {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Continue <ArrowRight className="h-4 w-4" /></>}
               </Button>
             )}
-            {step === 4 && (
+            {step === 5 && (
               <Button variant="hero" onClick={submit} disabled={saving}>
                 {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Send className="h-4 w-4" /> Submit application</>}
               </Button>
