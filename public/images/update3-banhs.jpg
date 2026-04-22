@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/JSS HD.png" />
+    <link rel="apple-touch-icon" href="/images/JSS HD.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>St. Mary's School - Excellence in Education</title>
+    <meta
+      name="description"
+      content="St. Mary's School - A premier educational institution committed to academic excellence, character development, and holistic education for students."
+    />
+    <script type="module" crossorigin src="/assets/index-RQ_beclu.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-B7CLzLhn.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
