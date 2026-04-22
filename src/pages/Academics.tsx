@@ -104,8 +104,9 @@ const Academics = () => {
             </div>
           </motion.div>
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl overflow-hidden shadow-elevated">
+            <div className="img-zoom img-overlay relative rounded-3xl overflow-hidden shadow-elevated">
               <img src="/images/academics_2.jpg" alt="St. Mary's academics" className="w-full aspect-[4/3] object-cover" />
+              <div className="absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-accent/30 blur-2xl pointer-events-none" />
             </div>
           </div>
         </div>

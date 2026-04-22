@@ -84,9 +84,12 @@ const SchoolLifePage = () => (
       <section key={s.id} id={s.id} className={i % 2 === 0 ? "py-24 bg-background" : "py-24 bg-gradient-soft"}>
         <div className="container-prose grid lg:grid-cols-12 gap-10 items-center">
           <motion.div initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7 }} className={i % 2 === 0 ? "lg:col-span-6 order-1" : "lg:col-span-6 order-1 lg:order-2"}>
-            <div className="relative rounded-3xl overflow-hidden shadow-elevated">
+            <div className="img-zoom relative rounded-3xl overflow-hidden shadow-elevated group">
               <img src={s.img} alt={s.title} loading="lazy" className="w-full aspect-[4/3] object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/60 via-primary-deep/10 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                <span className="inline-flex items-center gap-2 rounded-full bg-accent/90 backdrop-blur px-3 py-1 text-xs font-mono uppercase tracking-wider text-accent-foreground">{s.eyebrow}</span>
+              </div>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.7, delay: 0.1 }} className={i % 2 === 0 ? "lg:col-span-6 order-2" : "lg:col-span-6 order-2 lg:order-1"}>
