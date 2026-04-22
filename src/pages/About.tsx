@@ -23,15 +23,15 @@ const TIMELINE = [
 ];
 
 const LEADERSHIP = [
-  { name: "Sr. Dr. Mary Gabriel C.", role: "Principal", dept: "Administration", img: "https://stmarysseniorschoolbomet.co.ke/images/sr.JPG" },
-  { name: "Md. Kiama M.W.", role: "Deputy Principal", dept: "Administration", img: "https://stmarysseniorschoolbomet.co.ke/images/dp1.jpg" },
-  { name: "Mr. Cyrus L.", role: "Director of Studies — JSS", dept: "Junior Secondary", img: "https://stmarysseniorschoolbomet.co.ke/images/langat.JPG" },
-  { name: "Md. Winnie C.", role: "IQASO", dept: "Quality Assurance", img: "https://stmarysseniorschoolbomet.co.ke/images/image.png" },
-  { name: "Mr. Emmanuel O.", role: "Examination Officer", dept: "Examinations", img: "https://stmarysseniorschoolbomet.co.ke/images/Exams1.jpg" },
-  { name: "Md. Marble K.", role: "Boarding Mistress", dept: "Boarding", img: "https://stmarysseniorschoolbomet.co.ke/images/image.png" },
-  { name: "Mr. Korir D.", role: "H.O.D — Mathematics", dept: "Mathematics", img: "https://stmarysseniorschoolbomet.co.ke/images/korir.JPG" },
-  { name: "Md. Faith S.", role: "H.O.D — Languages", dept: "Languages", img: "https://stmarysseniorschoolbomet.co.ke/images/faith.jpg" },
-  { name: "Mr. Odhiambo M.", role: "Guidance & Counselling", dept: "Guidance", img: "https://stmarysseniorschoolbomet.co.ke/images/mose.jpg" },
+  { name: "Sr. Dr. Mary Gabriel C.", role: "Principal", dept: "Administration", img: "/images/sr.jpg" },
+  { name: "Md. Kiama M.W.", role: "Deputy Principal", dept: "Administration", img: "/images/dp1.jpg" },
+  { name: "Mr. Cyrus L.", role: "Director of Studies — JSS", dept: "Junior Secondary", img: "/images/langat.jpg" },
+  { name: "Md. Winnie C.", role: "IQASO", dept: "Quality Assurance", img: "/images/image.png" },
+  { name: "Mr. Emmanuel O.", role: "Examination Officer", dept: "Examinations", img: "/images/exams1.jpg" },
+  { name: "Md. Marble K.", role: "Boarding Mistress", dept: "Boarding", img: "/images/image.png" },
+  { name: "Mr. Korir D.", role: "H.O.D — Mathematics", dept: "Mathematics", img: "/images/korir.jpg" },
+  { name: "Md. Faith S.", role: "H.O.D — Languages", dept: "Languages", img: "/images/faith.jpg" },
+  { name: "Mr. Odhiambo M.", role: "Guidance & Counselling", dept: "Guidance", img: "/images/mose.jpg" },
 ];
 
 const About = () => (
@@ -72,7 +72,7 @@ const About = () => (
           </div>
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden shadow-elevated">
-              <img src="https://stmarysseniorschoolbomet.co.ke/images/teachers.JPG" alt="St. Mary's School staff" className="w-full aspect-[4/3] object-cover" />
+              <img src="/images/teachers.jpg" alt="St. Mary's School staff" className="w-full aspect-[4/3] object-cover" />
               <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-mono font-semibold uppercase tracking-wider">
                 35+ Years Award
               </div>
@@ -97,7 +97,7 @@ const About = () => (
         </div>
         <div className="lg:col-span-6">
           <div className="rounded-3xl overflow-hidden shadow-elevated">
-            <img src="https://stmarysseniorschoolbomet.co.ke/images/OurHistory.jpg" alt="St. Mary's School journey" className="w-full aspect-[5/4] object-cover" />
+            <img src="/images/ourhistory.jpg" alt="St. Mary's School journey" className="w-full aspect-[5/4] object-cover" />
           </div>
         </div>
       </div>
@@ -199,7 +199,7 @@ const About = () => (
       <div className="container-prose grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-5">
           <div className="rounded-3xl overflow-hidden shadow-elevated">
-            <img src="https://stmarysseniorschoolbomet.co.ke/images/bom1.jpg" alt="BOM Chair" className="w-full aspect-[4/5] object-cover" />
+            <img src="/images/bom1.jpg" alt="BOM Chair" className="w-full aspect-[4/5] object-cover" />
           </div>
         </div>
         <div className="lg:col-span-7">
@@ -234,7 +234,7 @@ const About = () => (
         </div>
         <div className="lg:col-span-5 order-1 lg:order-2">
           <div className="rounded-3xl overflow-hidden shadow-elevated">
-            <img src="https://stmarysseniorschoolbomet.co.ke/images/sr.JPG" alt="Principal" className="w-full aspect-[4/5] object-cover" />
+            <img src="/images/sr.jpg" alt="Principal" className="w-full aspect-[4/5] object-cover" />
           </div>
         </div>
       </div>

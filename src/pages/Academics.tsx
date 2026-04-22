@@ -105,7 +105,7 @@ const Academics = () => {
           </motion.div>
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden shadow-elevated">
-              <img src="https://stmarysseniorschoolbomet.co.ke/images/Academics_2.jpg" alt="St. Mary's academics" className="w-full aspect-[4/3] object-cover" />
+              <img src="/images/academics_2.jpg" alt="St. Mary's academics" className="w-full aspect-[4/3] object-cover" />
             </div>
           </div>
         </div>

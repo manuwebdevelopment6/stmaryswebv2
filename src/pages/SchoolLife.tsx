@@ -6,7 +6,7 @@ import { Bed, Trophy, Users, Music, Heart, Utensils, Shield, Sparkles, Cpu, Mic 
 const SECTIONS = [
   {
     id: "boarding",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/update3-banhs.jpg",
+    img: "/images/update3-banhs.jpg",
     eyebrow: "— Boarding",
     title: "A safe home in the highlands.",
     body: "Well-supervised dormitories, dedicated matrons and a calm study environment make St. Mary's a true home away from home for our learners from across the South Rift.",
@@ -19,7 +19,7 @@ const SECTIONS = [
   },
   {
     id: "sports",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/band1.jpg",
+    img: "/images/band1.jpg",
     eyebrow: "— Sports & Music",
     title: "From the pitch to the National Music Festival.",
     body: "Our school band qualified for the Kenya Music Festival National Finals 2025 and shines at the Rift Valley Regional Sports gala. Athletics, ball games and cultural music thrive side by side.",
@@ -32,7 +32,7 @@ const SECTIONS = [
   },
   {
     id: "clubs",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/update_1-Bandjss.jpg",
+    img: "/images/update_1-bandjss.jpg",
     eyebrow: "— Clubs & Arts",
     title: "Spaces for every passion.",
     body: "Whether the debate floor, the science congress, the choir loft or the drama festival, every Marian finds a stage to grow on under our CBC pathways.",
@@ -45,7 +45,7 @@ const SECTIONS = [
   },
   {
     id: "ict",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/students1.jpg",
+    img: "/images/students1.jpg",
     eyebrow: "— ICT Innovation Lab",
     title: "Empowering learners through digital skills.",
     body: "Our newly launched ICT Innovation Lab is a modern hub for digital skills, internet-based research, basic coding and CBC technology projects.",

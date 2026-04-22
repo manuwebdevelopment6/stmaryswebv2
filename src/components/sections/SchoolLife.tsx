@@ -4,21 +4,21 @@ import { ArrowUpRight } from "lucide-react";
 
 const ITEMS = [
   {
-    img: "https://stmarysseniorschoolbomet.co.ke/images/GRADE10.jpg",
+    img: "/images/grade10.jpg",
     title: "Senior Secondary (Grade 10)",
     body: "University-prep with specialised CBE pathways: STEM, Social Sciences, Arts & Sports.",
     to: "/academics#senior",
     badge: "Grade 10",
   },
   {
-    img: "https://stmarysseniorschoolbomet.co.ke/images/GRADE%209%20KNEC%20AGN.jpg",
+    img: "/images/grade-9-knec-agn.jpg",
     title: "Junior Secondary (Grade 7-9)",
     body: "Career pathway introduction and advanced skill development with mentorship.",
     to: "/academics#junior",
     badge: "Grade 7-9",
   },
   {
-    img: "https://stmarysseniorschoolbomet.co.ke/images/update_1-Bandjss.jpg",
+    img: "/images/update_1-bandjss.jpg",
     title: "School Life",
     body: "From the school band & sports to the ICT Innovation Lab — a vibrant boarding community.",
     to: "/life",

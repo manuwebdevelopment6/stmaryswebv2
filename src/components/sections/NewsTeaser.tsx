@@ -6,7 +6,7 @@ const NEWS = [
   {
     cat: "Academic Excellence",
     date: "12 July 2025",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/Grade%207%20agric.jpg",
+    img: "/images/grade-7-agric.jpg",
     title: "Grade 7 Learners Excel in Agriculture Assessment",
     excerpt: "Grade 7 students showcased creativity and hands-on skills during their CBC Agriculture practical assessment.",
     slug: "grade-7-agric-2025",
@@ -14,7 +14,7 @@ const NEWS = [
   {
     cat: "Faith & Culture",
     date: "5 July 2025",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/band2.jpg",
+    img: "/images/band2.jpg",
     title: "Band Represents School at Catholic Youth Rally",
     excerpt: "The school band proudly represented St. Mary's at the Catholic Diocese of Kericho Youth Rally 2025.",
     slug: "catholic-youth-rally-2025",
@@ -22,7 +22,7 @@ const NEWS = [
   {
     cat: "Co-Curricular",
     date: "27 March 2025",
-    img: "https://stmarysseniorschoolbomet.co.ke/images/band1.jpg",
+    img: "/images/band1.jpg",
     title: "School Band Shines at Rift Valley Regional Sports",
     excerpt: "Our talented school band added colour and pride to the Rift Valley Regional Sports gala.",
     slug: "rift-valley-band-2025",
