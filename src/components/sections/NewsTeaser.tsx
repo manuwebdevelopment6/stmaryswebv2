@@ -58,10 +58,10 @@ export const NewsTeaser = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
-            className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elevated hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-2xl border border-border bg-card overflow-hidden hover:shadow-elevated hover:-translate-y-1 transition-all duration-300 shine"
           >
-            <div className="aspect-[16/10] overflow-hidden bg-muted">
-              <img src={n.img} alt={n.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="img-zoom img-overlay aspect-[16/10] bg-muted">
+              <img src={n.img} alt={n.title} loading="lazy" className="w-full h-full object-cover" />
             </div>
             <div className="p-6">
               <div className="flex items-center gap-3 mb-4">
