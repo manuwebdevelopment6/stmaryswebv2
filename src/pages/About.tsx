@@ -71,11 +71,13 @@ const About = () => (
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl overflow-hidden shadow-elevated">
+            <div className="img-zoom img-overlay relative rounded-3xl overflow-hidden shadow-elevated">
               <img src="/images/teachers.jpg" alt="St. Mary's School staff" className="w-full aspect-[4/3] object-cover" />
-              <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-mono font-semibold uppercase tracking-wider">
+              <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-accent text-accent-foreground text-xs font-mono font-semibold uppercase tracking-wider shine z-10">
                 35+ Years Award
               </div>
+              <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full bg-accent/30 blur-2xl pointer-events-none" />
+              <div className="absolute -top-4 -right-4 h-32 w-32 rounded-full bg-primary-glow/30 blur-2xl pointer-events-none" />
             </div>
           </div>
         </motion.div>
@@ -96,7 +98,7 @@ const About = () => (
           </p>
         </div>
         <div className="lg:col-span-6">
-          <div className="rounded-3xl overflow-hidden shadow-elevated">
+          <div className="img-zoom img-overlay rounded-3xl overflow-hidden shadow-elevated">
             <img src="/images/ourhistory.jpg" alt="St. Mary's School journey" className="w-full aspect-[5/4] object-cover" />
           </div>
         </div>
@@ -179,13 +181,13 @@ const About = () => (
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {LEADERSHIP.map((p, i) => (
-            <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }} className="group rounded-2xl border border-border bg-card overflow-hidden hover-lift">
-              <div className="aspect-[4/3] overflow-hidden bg-muted">
-                <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <motion.div key={p.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }} className="group rounded-2xl border border-border bg-card overflow-hidden hover-lift shine">
+              <div className="img-zoom img-overlay aspect-[4/3] bg-muted">
+                <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover" />
               </div>
-              <div className="p-5">
+              <div className="p-5 relative">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-primary">{p.dept}</span>
-                <h3 className="mt-1 font-display text-lg font-semibold text-foreground">{p.name}</h3>
+                <h3 className="mt-1 font-display text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{p.name}</h3>
                 <p className="text-sm text-muted-foreground">{p.role}</p>
               </div>
             </motion.div>
@@ -198,7 +200,7 @@ const About = () => (
     <section className="py-24 bg-background" id="bom">
       <div className="container-prose grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-5">
-          <div className="rounded-3xl overflow-hidden shadow-elevated">
+          <div className="img-zoom img-overlay rounded-3xl overflow-hidden shadow-elevated">
             <img src="/images/bom1.jpg" alt="BOM Chair" className="w-full aspect-[4/5] object-cover" />
           </div>
         </div>
@@ -233,7 +235,7 @@ const About = () => (
           <p className="text-sm text-muted-foreground">Principal</p>
         </div>
         <div className="lg:col-span-5 order-1 lg:order-2">
-          <div className="rounded-3xl overflow-hidden shadow-elevated">
+          <div className="img-zoom img-overlay rounded-3xl overflow-hidden shadow-elevated">
             <img src="/images/sr.jpg" alt="Principal" className="w-full aspect-[4/5] object-cover" />
           </div>
         </div>
