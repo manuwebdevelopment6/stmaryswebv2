@@ -4,11 +4,13 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle2, FileText, GraduationCap, User, Users, Loader2, Send, Plus, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, FileText, GraduationCap, User, Users, Loader2, Send, Plus, Pencil, Trash2, Paperclip, Upload, X as XIcon, Download } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+
+type DocItem = { name: string; path: string; size?: number };
 
 type App = {
   id: string;
@@ -30,6 +32,7 @@ type App = {
   guardian_address: string | null;
   boarding_preference: string | null;
   notes: string | null;
+  document_paths: DocItem[] | null;
   submitted_at: string | null;
   updated_at: string;
 };
@@ -38,7 +41,8 @@ const STEPS = [
   { n: 1, label: "Applicant", icon: User },
   { n: 2, label: "Previous School", icon: GraduationCap },
   { n: 3, label: "Guardian", icon: Users },
-  { n: 4, label: "Review", icon: FileText },
+  { n: 4, label: "Documents", icon: Paperclip },
+  { n: 5, label: "Review", icon: FileText },
 ];
 
 const FEES = [
