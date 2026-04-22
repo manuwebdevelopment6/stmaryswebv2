@@ -34,7 +34,7 @@ export const Hero = () => {
         className="absolute inset-0"
       >
         <img
-          src="https://stmarysseniorschoolbomet.co.ke/images/students1.jpg"
+          src="/images/students1.jpg"
           alt="St. Mary's Mixed Junior & Senior School Bomet — students on campus"
           className="h-full w-full object-cover"
           fetchPriority="high"
