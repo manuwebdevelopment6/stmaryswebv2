@@ -4,11 +4,13 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle2, FileText, GraduationCap, User, Users, Loader2, Send, Plus, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, FileText, GraduationCap, User, Users, Loader2, Send, Plus, Pencil, Trash2, Paperclip, Upload, X as XIcon, Download } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+
+type DocItem = { name: string; path: string; size?: number };
 
 type App = {
   id: string;
@@ -30,6 +32,7 @@ type App = {
   guardian_address: string | null;
   boarding_preference: string | null;
   notes: string | null;
+  document_paths: DocItem[] | null;
   submitted_at: string | null;
   updated_at: string;
 };
@@ -38,7 +41,8 @@ const STEPS = [
   { n: 1, label: "Applicant", icon: User },
   { n: 2, label: "Previous School", icon: GraduationCap },
   { n: 3, label: "Guardian", icon: Users },
-  { n: 4, label: "Review", icon: FileText },
+  { n: 4, label: "Documents", icon: Paperclip },
+  { n: 5, label: "Review", icon: FileText },
 ];
 
 const FEES = [
@@ -62,7 +66,7 @@ const Admissions = () => {
       .eq("user_id", user.id)
       .order("updated_at", { ascending: false });
     if (error) toast.error(error.message);
-    setApps((data ?? []) as App[]);
+    setApps((data ?? []) as unknown as App[]);
   };
 
   useEffect(() => { fetchApps(); /* eslint-disable-next-line */ }, [user]);
@@ -77,7 +81,7 @@ const Admissions = () => {
       .single();
     setBusy(false);
     if (error) return toast.error(error.message);
-    setEditing(data as App);
+    setEditing(data as unknown as App);
     fetchApps();
   };
 
@@ -162,7 +166,7 @@ const Admissions = () => {
                             : "Untitled application"}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          Updated {new Date(a.updated_at).toLocaleString()} · Step {a.current_step}/4
+                          Updated {new Date(a.updated_at).toLocaleString()} · Step {a.current_step}/5
                         </div>
                       </div>
                       <StatusBadge status={a.status} />
@@ -337,7 +341,7 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
     setSaving(true);
     const { error } = await supabase
       .from("applications")
-      .update({ ...stripMeta(data), status: "submitted", current_step: 4 })
+      .update({ ...stripMeta(data), status: "submitted", current_step: 5 })
       .eq("id", app.id);
     setSaving(false);
     if (error) return toast.error(error.message);
@@ -419,6 +423,14 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
           </Section>
         )}
         {step === 4 && (
+          <Section title="Supporting documents">
+            <p className="text-sm text-muted-foreground -mt-3 mb-5">
+              Upload scans or photos of: birth certificate, KCPE/KJSEA result slip, last school report, passport photo, guardian ID. PDF, JPG or PNG, max 10MB each. Documents are private — only you and school staff can view them.
+            </p>
+            <DocumentUploader app={app} data={data} setData={setData} />
+          </Section>
+        )}
+        {step === 5 && (
           <Section title="Review & submit">
             <ReviewBlock title="Applicant" rows={[
               ["Name", `${data.applicant_first_name ?? ""} ${data.applicant_last_name ?? ""}`.trim() || "—"],
@@ -438,6 +450,9 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
               ["Email", data.guardian_email ?? "—"],
               ["Address", data.guardian_address ?? "—"],
             ]} />
+            <ReviewBlock title="Documents" rows={[
+              ["Files attached", `${data.document_paths?.length ?? 0} file(s)`],
+            ]} />
             <p className="mt-6 text-xs text-muted-foreground">
               By submitting, you confirm the information is accurate. We'll contact your guardian within 5 working days.
             </p>
@@ -453,12 +468,12 @@ const ApplicationEditor = ({ app, onClose }: { app: App; onClose: () => void }) 
                 <ArrowLeft className="h-4 w-4" /> Back
               </Button>
             )}
-            {step < 4 && (
+            {step < 5 && (
               <Button variant="default" onClick={next} disabled={saving}>
                 {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Continue <ArrowRight className="h-4 w-4" /></>}
               </Button>
             )}
-            {step === 4 && (
+            {step === 5 && (
               <Button variant="hero" onClick={submit} disabled={saving}>
                 {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <><Send className="h-4 w-4" /> Submit application</>}
               </Button>
@@ -522,4 +537,135 @@ const ReviewBlock = ({ title, rows }: { title: string; rows: [string, string][] 
   </div>
 );
 
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
+
+const DocumentUploader = ({
+  app, data, setData,
+}: { app: App; data: App; setData: React.Dispatch<React.SetStateAction<App>> }) => {
+  const { user } = useAuth();
+  const [uploading, setUploading] = useState(false);
+  const docs: DocItem[] = data.document_paths ?? [];
+
+  const handleFiles = async (files: FileList | null) => {
+    if (!files || !user) return;
+    setUploading(true);
+    const next: DocItem[] = [...docs];
+    for (const file of Array.from(files)) {
+      if (file.size > MAX_FILE_BYTES) {
+        toast.error(`${file.name} is larger than 10MB`);
+        continue;
+      }
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const path = `${user.id}/${app.id}/${Date.now()}-${safeName}`;
+      const { error } = await supabase.storage
+        .from("application-documents")
+        .upload(path, file, { upsert: false, contentType: file.type });
+      if (error) { toast.error(`${file.name}: ${error.message}`); continue; }
+      next.push({ name: file.name, path, size: file.size });
+    }
+    const { error: updErr } = await supabase
+      .from("applications")
+      .update({ document_paths: next as any })
+      .eq("id", app.id);
+    if (updErr) toast.error(updErr.message);
+    else {
+      setData((d) => ({ ...d, document_paths: next }));
+      toast.success("Uploaded");
+    }
+    setUploading(false);
+  };
+
+  const removeDoc = async (path: string) => {
+    if (!confirm("Remove this document?")) return;
+    const { error } = await supabase.storage.from("application-documents").remove([path]);
+    if (error) return toast.error(error.message);
+    const next = docs.filter((d) => d.path !== path);
+    await supabase.from("applications").update({ document_paths: next as any }).eq("id", app.id);
+    setData((d) => ({ ...d, document_paths: next }));
+    toast.success("Removed");
+  };
+
+  const downloadDoc = async (path: string, name: string) => {
+    const { data: signed, error } = await supabase.storage
+      .from("application-documents")
+      .createSignedUrl(path, 60);
+    if (error || !signed) return toast.error(error?.message ?? "Could not get URL");
+    const a = document.createElement("a");
+    a.href = signed.signedUrl;
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+
+  return (
+    <div>
+      <label className="block">
+        <input
+          type="file"
+          multiple
+          accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+          className="sr-only"
+          onChange={(e) => { handleFiles(e.target.files); e.currentTarget.value = ""; }}
+          disabled={uploading}
+        />
+        <div className={cn(
+          "rounded-2xl border-2 border-dashed border-border bg-secondary/40 p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-secondary/60 transition-colors",
+          uploading && "opacity-60 pointer-events-none"
+        )}>
+          {uploading ? (
+            <Loader2 className="h-8 w-8 mx-auto animate-spin text-primary" />
+          ) : (
+            <Upload className="h-8 w-8 mx-auto text-primary" />
+          )}
+          <p className="mt-3 font-display text-base font-semibold text-foreground">
+            {uploading ? "Uploading…" : "Click to upload documents"}
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            PDF, JPG or PNG · max 10MB each · select multiple files
+          </p>
+        </div>
+      </label>
+
+      {docs.length > 0 && (
+        <ul className="mt-5 space-y-2">
+          {docs.map((d) => (
+            <li
+              key={d.path}
+              className="flex items-center gap-3 rounded-lg border border-border bg-card p-3"
+            >
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
+                <FileText className="h-4 w-4" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">{d.name}</p>
+                {d.size && (
+                  <p className="text-xs text-muted-foreground">
+                    {(d.size / 1024).toFixed(0)} KB
+                  </p>
+                )}
+              </div>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => downloadDoc(d.path, d.name)}
+                aria-label="Download"
+              >
+                <Download className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => removeDoc(d.path)}
+                aria-label="Remove"
+              >
+                <XIcon className="h-3.5 w-3.5" />
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 export default Admissions;
+
