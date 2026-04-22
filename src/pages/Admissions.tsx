@@ -537,4 +537,135 @@ const ReviewBlock = ({ title, rows }: { title: string; rows: [string, string][] 
   </div>
 );
 
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
+
+const DocumentUploader = ({
+  app, data, setData,
+}: { app: App; data: App; setData: React.Dispatch<React.SetStateAction<App>> }) => {
+  const { user } = useAuth();
+  const [uploading, setUploading] = useState(false);
+  const docs: DocItem[] = data.document_paths ?? [];
+
+  const handleFiles = async (files: FileList | null) => {
+    if (!files || !user) return;
+    setUploading(true);
+    const next: DocItem[] = [...docs];
+    for (const file of Array.from(files)) {
+      if (file.size > MAX_FILE_BYTES) {
+        toast.error(`${file.name} is larger than 10MB`);
+        continue;
+      }
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const path = `${user.id}/${app.id}/${Date.now()}-${safeName}`;
+      const { error } = await supabase.storage
+        .from("application-documents")
+        .upload(path, file, { upsert: false, contentType: file.type });
+      if (error) { toast.error(`${file.name}: ${error.message}`); continue; }
+      next.push({ name: file.name, path, size: file.size });
+    }
+    const { error: updErr } = await supabase
+      .from("applications")
+      .update({ document_paths: next as any })
+      .eq("id", app.id);
+    if (updErr) toast.error(updErr.message);
+    else {
+      setData((d) => ({ ...d, document_paths: next }));
+      toast.success("Uploaded");
+    }
+    setUploading(false);
+  };
+
+  const removeDoc = async (path: string) => {
+    if (!confirm("Remove this document?")) return;
+    const { error } = await supabase.storage.from("application-documents").remove([path]);
+    if (error) return toast.error(error.message);
+    const next = docs.filter((d) => d.path !== path);
+    await supabase.from("applications").update({ document_paths: next as any }).eq("id", app.id);
+    setData((d) => ({ ...d, document_paths: next }));
+    toast.success("Removed");
+  };
+
+  const downloadDoc = async (path: string, name: string) => {
+    const { data: signed, error } = await supabase.storage
+      .from("application-documents")
+      .createSignedUrl(path, 60);
+    if (error || !signed) return toast.error(error?.message ?? "Could not get URL");
+    const a = document.createElement("a");
+    a.href = signed.signedUrl;
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+
+  return (
+    <div>
+      <label className="block">
+        <input
+          type="file"
+          multiple
+          accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
+          className="sr-only"
+          onChange={(e) => { handleFiles(e.target.files); e.currentTarget.value = ""; }}
+          disabled={uploading}
+        />
+        <div className={cn(
+          "rounded-2xl border-2 border-dashed border-border bg-secondary/40 p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-secondary/60 transition-colors",
+          uploading && "opacity-60 pointer-events-none"
+        )}>
+          {uploading ? (
+            <Loader2 className="h-8 w-8 mx-auto animate-spin text-primary" />
+          ) : (
+            <Upload className="h-8 w-8 mx-auto text-primary" />
+          )}
+          <p className="mt-3 font-display text-base font-semibold text-foreground">
+            {uploading ? "Uploading…" : "Click to upload documents"}
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            PDF, JPG or PNG · max 10MB each · select multiple files
+          </p>
+        </div>
+      </label>
+
+      {docs.length > 0 && (
+        <ul className="mt-5 space-y-2">
+          {docs.map((d) => (
+            <li
+              key={d.path}
+              className="flex items-center gap-3 rounded-lg border border-border bg-card p-3"
+            >
+              <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-primary/10 text-primary">
+                <FileText className="h-4 w-4" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">{d.name}</p>
+                {d.size && (
+                  <p className="text-xs text-muted-foreground">
+                    {(d.size / 1024).toFixed(0)} KB
+                  </p>
+                )}
+              </div>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => downloadDoc(d.path, d.name)}
+                aria-label="Download"
+              >
+                <Download className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => removeDoc(d.path)}
+                aria-label="Remove"
+              >
+                <XIcon className="h-3.5 w-3.5" />
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 export default Admissions;
+
