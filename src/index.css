@@ -171,7 +171,7 @@
     letter-spacing: -0.025em;
   }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-  .container-prose { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
+  .container-prose { @apply mx-auto w-full max-w-[1480px] px-4 sm:px-6 lg:px-8 xl:px-10; }
   .text-balance { text-wrap: balance; }
 
   .bg-gradient-hero { background: var(--gradient-hero); }
