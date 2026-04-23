@@ -143,6 +143,39 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* Map */}
+      <section className="py-20 bg-secondary/40 border-t border-border">
+        <div className="container-prose">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">— Find Us</span>
+              <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold text-foreground">Visit our campus</h2>
+              <p className="mt-2 text-muted-foreground max-w-xl">Drop by Monday – Saturday during office hours. Walk-ins are welcome at our admissions desk.</p>
+            </div>
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=St.+Mary's+Mixed+Secondary+School+Bomet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 self-start sm:self-end rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold hover:bg-primary/90 transition-colors shadow-card"
+            >
+              <MapPin className="h-4 w-4" /> Get directions
+            </a>
+          </div>
+          <div className="relative overflow-hidden rounded-3xl border border-border shadow-elevated bg-card">
+            <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-foreground/5 rounded-3xl z-10" />
+            <iframe
+              title="St. Mary's Mixed Junior & Senior School, Bomet — Google Map"
+              src="https://www.google.com/maps?q=St.+Mary's+Mixed+Secondary+School+Bomet,+Kenya&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[420px] sm:h-[520px] block grayscale-[20%] hover:grayscale-0 transition-[filter] duration-500"
+              style={{ border: 0 }}
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
     </SiteLayout>
   );
 };
