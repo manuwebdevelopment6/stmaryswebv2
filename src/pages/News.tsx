@@ -79,20 +79,29 @@ const News = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((a, i) => (
-                <motion.article key={a.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay: i * 0.04 }} className="group rounded-2xl border border-border bg-card overflow-hidden hover-lift">
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
-                    <img src={a.img} alt={a.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <motion.article
+                  key={a.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.55, delay: i * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  className="group relative rounded-2xl border border-border bg-card overflow-hidden hover-lift"
+                >
+                  <div className="img-zoom shine relative aspect-[16/10] overflow-hidden bg-muted">
+                    <img src={a.img} alt={a.title} loading="lazy" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/55 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className={`absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-md ${CAT_STYLES[a.cat]}`}>{a.cat}</span>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${CAT_STYLES[a.cat]}`}>{a.cat}</span>
-                      <span className="text-xs text-muted-foreground inline-flex items-center gap-1.5"><Calendar className="h-3 w-3" /> {a.date}</span>
+                    <div className="flex items-center gap-2 mb-3 text-xs text-muted-foreground">
+                      <Calendar className="h-3 w-3" /> {a.date}
+                      <span className="opacity-40">·</span>
+                      <span className="font-mono">{a.author}</span>
                     </div>
                     <h3 className="font-display text-xl font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">{a.title}</h3>
-                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{a.excerpt}</p>
-                    <div className="mt-5 flex items-center justify-between">
-                      <span className="text-xs font-mono text-muted-foreground">{a.author}</span>
-                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">Read more <ArrowRight className="h-3.5 w-3.5" /></span>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">{a.excerpt}</p>
+                    <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
+                      Read story <ArrowRight className="h-3.5 w-3.5" />
                     </div>
                   </div>
                 </motion.article>

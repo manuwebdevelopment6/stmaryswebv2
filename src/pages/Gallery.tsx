@@ -214,22 +214,27 @@ const Gallery = () => {
                 transition={{ duration: 0.5, delay: i * 0.04 }}
                 className="group text-left rounded-2xl border border-border bg-card overflow-hidden hover-lift focus:outline-none focus:ring-2 focus:ring-ring"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                <div className="img-zoom shine relative aspect-[4/3] overflow-hidden bg-muted">
                   <img
                     src={a.cover}
                     alt={a.title}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/80 via-primary-deep/10 to-transparent" />
                   <span
-                    className={`absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded ${CAT_STYLES[a.cat]} backdrop-blur`}
+                    className={`absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded ${CAT_STYLES[a.cat]} backdrop-blur-md`}
                   >
                     {a.cat}
                   </span>
                   <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 text-xs text-primary-foreground bg-primary-deep/60 backdrop-blur px-2 py-1 rounded">
                     <Camera className="h-3 w-3" /> {a.count}
                   </span>
+                  <div className="absolute inset-x-0 bottom-0 p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground bg-accent/90 text-accent-foreground px-2.5 py-1 rounded">
+                      View album →
+                    </span>
+                  </div>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-semibold leading-snug text-foreground group-hover:text-primary transition-colors">
