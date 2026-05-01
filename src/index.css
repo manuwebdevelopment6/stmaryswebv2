@@ -156,6 +156,31 @@
     font-feature-settings: "ss01", "cv11";
   }
 
+  /* =====================================================================
+     Always-dark surfaces (hero panels, CTA bands, footer, testimonials)
+     Locally pin --primary-foreground to a light value so descendant
+     `text-primary-foreground`, `border-primary-foreground/X`, and
+     `bg-primary-foreground/X` utilities stay legible in BOTH themes.
+     This avoids touching every component while fixing dark-mode contrast.
+     ===================================================================== */
+  .bg-primary-deep,
+  .bg-gradient-royal,
+  .bg-gradient-hero,
+  [data-surface="deep"] {
+    --primary-foreground: 220 33% 98%;
+    --foreground: 220 33% 98%;
+    --muted-foreground: 220 20% 78%;
+    --border: 220 33% 98% / 0.15;
+  }
+  .dark .bg-primary-deep,
+  .dark .bg-gradient-royal,
+  .dark .bg-gradient-hero,
+  .dark [data-surface="deep"] {
+    --primary-foreground: 220 33% 96%;
+    --foreground: 220 33% 96%;
+    --muted-foreground: 220 18% 72%;
+  }
+
   ::selection {
     background: hsl(var(--accent) / 0.35);
     color: hsl(var(--primary-deep));
