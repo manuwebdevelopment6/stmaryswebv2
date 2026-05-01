@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Plus, Trash2, Upload, Loader2 } from "lucide-react";
 import type { FieldDef } from "@/lib/cms/types";
 import { Input } from "@/components/ui/input";
@@ -196,5 +196,4 @@ const ImageField = ({ label, value, onChange, help }: {
   );
 };
 
-// useState import for ImageField
-import { useState } from "react";
+
