@@ -197,6 +197,13 @@
   }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
   .container-prose { @apply mx-auto w-full max-w-[1480px] px-4 sm:px-6 lg:px-8 xl:px-10; }
+  /* Always-light text/border for use over dark hero backgrounds (theme-stable) */
+  .text-on-dark { color: hsl(220 33% 98%); }
+  .text-on-dark\/90 { color: hsl(220 33% 98% / 0.9); }
+  .text-on-dark\/80 { color: hsl(220 33% 98% / 0.8); }
+  .text-on-dark\/70 { color: hsl(220 33% 98% / 0.7); }
+  .border-on-dark\/30 { border-color: hsl(220 33% 98% / 0.3); }
+  .hover\:text-on-dark:hover { color: hsl(220 33% 98%); }
   .text-balance { text-wrap: balance; }
 
   .bg-gradient-hero { background: var(--gradient-hero); }
