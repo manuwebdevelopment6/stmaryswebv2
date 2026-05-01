@@ -101,6 +101,83 @@ export type Database = {
         }
         Relationships: []
       }
+      page_blocks: {
+        Row: {
+          block_type: string
+          created_at: string
+          draft_data: Json
+          id: string
+          is_visible: boolean
+          page_id: string
+          position: number
+          published_data: Json | null
+          updated_at: string
+        }
+        Insert: {
+          block_type: string
+          created_at?: string
+          draft_data?: Json
+          id?: string
+          is_visible?: boolean
+          page_id: string
+          position?: number
+          published_data?: Json | null
+          updated_at?: string
+        }
+        Update: {
+          block_type?: string
+          created_at?: string
+          draft_data?: Json
+          id?: string
+          is_visible?: boolean
+          page_id?: string
+          position?: number
+          published_data?: Json | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "page_blocks_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pages: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          status: Database["public"]["Enums"]["page_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["page_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["page_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -177,6 +254,7 @@ export type Database = {
         | "accepted"
         | "declined"
         | "waitlisted"
+      page_status: "draft" | "published"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -313,6 +391,7 @@ export const Constants = {
         "declined",
         "waitlisted",
       ],
+      page_status: ["draft", "published"],
     },
   },
 } as const
