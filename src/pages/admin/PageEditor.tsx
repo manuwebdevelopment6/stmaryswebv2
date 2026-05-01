@@ -159,7 +159,7 @@ const PageEditor = () => {
     setPublishing(true);
     const dirty = blocks.filter((b) => JSON.stringify(b.published_data) !== JSON.stringify(b.draft_data));
     await Promise.all(dirty.map((b) =>
-      supabase.from("page_blocks").update({ published_data: b.draft_data }).eq("id", b.id)
+      supabase.from("page_blocks").update({ published_data: b.draft_data as never }).eq("id", b.id)
     ));
     await supabase.from("pages").update({
       status: "published", published_at: new Date().toISOString(),
