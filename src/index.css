@@ -156,6 +156,31 @@
     font-feature-settings: "ss01", "cv11";
   }
 
+  /* =====================================================================
+     Always-dark surfaces (hero panels, CTA bands, footer, testimonials)
+     Locally pin --primary-foreground to a light value so descendant
+     `text-primary-foreground`, `border-primary-foreground/X`, and
+     `bg-primary-foreground/X` utilities stay legible in BOTH themes.
+     This avoids touching every component while fixing dark-mode contrast.
+     ===================================================================== */
+  .bg-primary-deep,
+  .bg-gradient-royal,
+  .bg-gradient-hero,
+  [data-surface="deep"] {
+    --primary-foreground: 220 33% 98%;
+    --foreground: 220 33% 98%;
+    --muted-foreground: 220 20% 78%;
+    --border: 220 33% 98% / 0.15;
+  }
+  .dark .bg-primary-deep,
+  .dark .bg-gradient-royal,
+  .dark .bg-gradient-hero,
+  .dark [data-surface="deep"] {
+    --primary-foreground: 220 33% 96%;
+    --foreground: 220 33% 96%;
+    --muted-foreground: 220 18% 72%;
+  }
+
   ::selection {
     background: hsl(var(--accent) / 0.35);
     color: hsl(var(--primary-deep));
@@ -172,6 +197,13 @@
   }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
   .container-prose { @apply mx-auto w-full max-w-[1480px] px-4 sm:px-6 lg:px-8 xl:px-10; }
+  /* Always-light text/border for use over dark hero backgrounds (theme-stable) */
+  .text-on-dark { color: hsl(220 33% 98%); }
+  .text-on-dark\/90 { color: hsl(220 33% 98% / 0.9); }
+  .text-on-dark\/80 { color: hsl(220 33% 98% / 0.8); }
+  .text-on-dark\/70 { color: hsl(220 33% 98% / 0.7); }
+  .border-on-dark\/30 { border-color: hsl(220 33% 98% / 0.3); }
+  .hover\:text-on-dark:hover { color: hsl(220 33% 98%); }
   .text-balance { text-wrap: balance; }
 
   .bg-gradient-hero { background: var(--gradient-hero); }
