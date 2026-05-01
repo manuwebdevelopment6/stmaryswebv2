@@ -35,7 +35,8 @@ const PageEditor = () => {
   const { slug = "" } = useParams();
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const { isAdmin, loading: rolesLoading } = useUserRoles();
+  const { hasRole, loading: rolesLoading } = useUserRoles();
+  const isAdmin = hasRole("admin");
 
   const [page, setPage] = useState<PageRow | null>(null);
   const [blocks, setBlocks] = useState<PageBlockRow[]>([]);

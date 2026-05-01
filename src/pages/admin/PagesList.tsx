@@ -13,7 +13,8 @@ import type { PageRow } from "@/lib/cms/types";
 const PagesList = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const { isAdmin, loading: rolesLoading } = useUserRoles();
+  const { hasRole, loading: rolesLoading } = useUserRoles();
+  const isAdmin = hasRole("admin");
 
   const [pages, setPages] = useState<(PageRow & { block_count: number; draft_count: number })[]>([]);
   const [loading, setLoading] = useState(true);
