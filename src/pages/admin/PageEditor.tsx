@@ -87,8 +87,8 @@ const PageEditor = () => {
       page_id: page.id,
       block_type: type,
       position: nextPos,
-      draft_data: def.defaults,
-    }).select("*").single();
+      draft_data: def.defaults as never,
+    } as never).select("*").single();
     if (error) return toast.error(error.message);
     setBlocks((prev) => [...prev, data as PageBlockRow]);
     setAdding(false);
@@ -99,7 +99,7 @@ const PageEditor = () => {
   const updateBlockDraft = async (id: string, draft: Record<string, unknown>) => {
     setSavingBlock(id);
     const { error } = await supabase.from("page_blocks")
-      .update({ draft_data: draft }).eq("id", id);
+      .update({ draft_data: draft as never }).eq("id", id);
     setSavingBlock(null);
     if (error) return toast.error(error.message);
     setBlocks((prev) => prev.map((b) => b.id === id ? { ...b, draft_data: draft } : b));
@@ -111,7 +111,7 @@ const PageEditor = () => {
     if (!b) return;
     setSavingBlock(id);
     const { error } = await supabase.from("page_blocks")
-      .update({ published_data: b.draft_data }).eq("id", id);
+      .update({ published_data: b.draft_data as never }).eq("id", id);
     setSavingBlock(null);
     if (error) return toast.error(error.message);
     setBlocks((prev) => prev.map((x) => x.id === id ? { ...x, published_data: b.draft_data } : x));
