@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Shield, Users, FileText, Search, Loader2, CheckCircle2, XCircle,
-  Clock, UserCog, Trash2, Eye, ChevronDown, BarChart3, LogOut,
+  Clock, UserCog, Trash2, Eye, ChevronDown, BarChart3, LogOut, Layers,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
@@ -160,9 +160,16 @@ const Admin = () => {
               <h1 className="font-display font-bold text-display-lg text-balance">
                 Admin <span className="text-gradient-aurora italic">dashboard</span>
               </h1>
-              <div className="text-sm text-primary-foreground/80">
-                Signed in as <span className="font-semibold">{user.email}</span>
-                {isAdmin && <span className="ml-2 px-2 py-0.5 rounded bg-accent/20 text-accent text-xs font-mono uppercase">Admin</span>}
+              <div className="flex flex-wrap items-center gap-2">
+                {isAdmin && (
+                  <Button asChild variant="gold" size="sm">
+                    <Link to="/admin/pages"><Layers className="h-4 w-4" /> Manage website pages</Link>
+                  </Button>
+                )}
+                <div className="text-sm text-primary-foreground/80">
+                  Signed in as <span className="font-semibold">{user.email}</span>
+                  {isAdmin && <span className="ml-2 px-2 py-0.5 rounded bg-accent/20 text-accent text-xs font-mono uppercase">Admin</span>}
+                </div>
               </div>
             </div>
           </motion.div>

@@ -18,6 +18,8 @@ import Gallery from "./pages/Gallery.tsx";
 import ExamDownloads from "./pages/ExamDownloads.tsx";
 import StudentPortal from "./pages/StudentPortal.tsx";
 import Admin from "./pages/Admin.tsx";
+import PagesList from "./pages/admin/PagesList.tsx";
+import PageEditor from "./pages/admin/PageEditor.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -43,6 +45,8 @@ const App = () => (
               <Route path="/exam-downloads" element={<ExamDownloads />} />
               <Route path="/portal" element={<StudentPortal />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/pages" element={<PagesList />} />
+              <Route path="/admin/pages/:slug" element={<PageEditor />} />
               <Route path="/auth" element={<Auth />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
