@@ -138,7 +138,7 @@ export const Header = () => {
         </div>
 
         <button
-          className={cn("lg:hidden grid h-10 w-10 place-items-center rounded-md", scrolled ? "text-foreground" : "text-primary-foreground")}
+          className={cn("lg:hidden grid h-10 w-10 place-items-center rounded-md", scrolled ? "text-foreground" : "text-on-dark")}
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
