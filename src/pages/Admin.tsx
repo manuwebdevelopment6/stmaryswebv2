@@ -171,6 +171,10 @@ const Admin = () => {
                   {isAdmin && <span className="ml-2 px-2 py-0.5 rounded bg-accent/20 text-accent text-xs font-mono uppercase">Admin</span>}
                 </div>
               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Tabs */}
       <section className="py-12 bg-background">
