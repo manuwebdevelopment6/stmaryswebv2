@@ -90,7 +90,7 @@ export const Header = () => {
                 to={item.to}
                 className={({ isActive }) => cn(
                   "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  scrolled ? "text-foreground hover:text-primary" : "text-primary-foreground/90 hover:text-primary-foreground",
+                  scrolled ? "text-foreground hover:text-primary" : "text-on-dark/90 hover:text-on-dark",
                   isActive && (scrolled ? "text-primary" : "text-accent")
                 )}
               >
