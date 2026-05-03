@@ -17,15 +17,15 @@ const Index = () => (
       canonical={typeof window !== 'undefined' ? window.location.origin + '/' : undefined}
     />
     <CmsPage slug="home" fallback={<>
-    <Hero />
-    <StatsBand />
-    <SchoolLife />
-    <ResultsPreview />
-    <Testimonials />
-    <NewsTeaser />
-    <CtaBand />
+      <Hero />
+      <StatsBand />
+      <SchoolLife />
+      <ResultsPreview />
+      <Testimonials />
+      <NewsTeaser />
+      <CtaBand />
+    </>} />
   </SiteLayout>
 );
-    </>} />
 
 export default Index;
