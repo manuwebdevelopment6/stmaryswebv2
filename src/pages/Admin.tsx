@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   Shield, Users, FileText, Search, Loader2, CheckCircle2, XCircle,
   Clock, UserCog, Trash2, Eye, ChevronDown, BarChart3, LogOut, Layers,
+  Download, ExternalLink, FileImage, File as FileIcon, Paperclip,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
