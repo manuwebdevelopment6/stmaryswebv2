@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 type DocItem = { name: string; path: string; size?: number };
 
@@ -99,6 +100,7 @@ const Admissions = () => {
         title="Admissions Grade 7-10 (2026) — Apply Online | St. Mary's Bomet"
         description="Apply for Grade 7, 8, 9 or 10 at St. Mary's Mixed Junior & Senior School Bomet. Multi-step online application, document upload, fee info and entrance interview booking."
       />
+      <CmsPage slug="admissions" fallback={<>
 
       {/* Hero */}
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-24 overflow-hidden">
@@ -285,6 +287,7 @@ const Admissions = () => {
           </div>
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };

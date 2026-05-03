@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BookOpen, FlaskConical, Languages, Calculator, Globe, Music, Trophy, ArrowRight, Palette, Activity, Briefcase, Sprout, Heart, Accessibility, Target, Users, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const FRAMEWORK = [
   { icon: Target, title: "Competency-Based", body: "Focus on skills and abilities rather than just knowledge." },
@@ -79,6 +80,7 @@ const Academics = () => {
         title="Academics — CBE Curriculum & Career Pathways | St. Mary's Bomet"
         description="Explore St. Mary's CBE curriculum from Grade 7-10: STEM, Social Sciences, and Arts & Sports pathways. 40+ subject combinations, 98% success rate."
       />
+      <CmsPage slug="academics" fallback={<>
 
       {/* Hero */}
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-24 overflow-hidden">
@@ -284,6 +286,7 @@ const Academics = () => {
           </div>
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };

@@ -6,6 +6,7 @@ import { Plus, X, MapPin, Church, BookOpen, FlaskConical, Trophy, Bed, UtensilsC
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import campus from "@/assets/campus-map.jpg";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 type Spot = {
   id: string;
@@ -35,6 +36,7 @@ const VirtualTour = () => {
         title="Virtual Campus Tour — St. Mary's Senior School Bomet"
         description="Explore the St. Mary's campus from anywhere. Click hotspots to see the chapel, science labs, library, sports field, dining hall and boarding houses."
       />
+      <CmsPage slug="virtual-tour" fallback={<>
 
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
@@ -125,6 +127,7 @@ const VirtualTour = () => {
           </div>
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };
