@@ -2,6 +2,7 @@ import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { motion } from "framer-motion";
 import { Award, BookOpen, Heart, Users, Shield, Sparkles, Target, Eye } from "lucide-react";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const VALUES = [
   { icon: Sparkles, title: "God Centeredness", body: "Faith-based foundation in all we do — anchored in Catholic values." },
@@ -40,6 +41,7 @@ const About = () => (
       title="About St. Mary's Bomet — Our Story, Mission & Vision Since 1990"
       description="Founded in 1990 by Rev. Fr. Ceasser & Sr. Francis Xavier Chebet F.S.S.J, St. Mary's Mixed Junior & Senior School Bomet is a Catholic Diocese of Kericho institution shaping young Kenyan leaders through CBE."
     />
+    <CmsPage slug="about" fallback={<>
 
     {/* Hero */}
     <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-24 overflow-hidden">
@@ -266,6 +268,7 @@ const About = () => (
         </div>
       </div>
     </section>
+    </>} />
   </SiteLayout>
 );
 

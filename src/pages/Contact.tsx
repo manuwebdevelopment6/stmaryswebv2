@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const INFO = [
   { icon: MapPin, label: "Address", value: "St. Mary's Mixed Junior & Senior School\nP.O. Box 329-20300\nBomet, Kenya" },
@@ -41,6 +42,7 @@ const Contact = () => {
         title="Contact St. Mary's Bomet — Phone, Email & Visit"
         description="Get in touch with St. Mary's Mixed Junior & Senior School in Bomet, Kenya. Phone +254 721 771 568, email stmaryssecbomet@gmail.com, P.O. Box 329-20300."
       />
+      <CmsPage slug="contact" fallback={<>
 
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
@@ -176,6 +178,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };

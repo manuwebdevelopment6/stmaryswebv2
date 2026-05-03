@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Calendar, Search, ArrowRight } from "lucide-react";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const ARTICLES = [
   { cat: "Academic", date: "12 July 2025", img: "/images/grade-7-agric.jpg", title: "Grade 7 Learners Excel in Agriculture Assessment", excerpt: "Grade 7 students showcased creativity and hands-on skills during their CBC Agriculture practical assessment.", author: "Academic Department" },
@@ -40,6 +41,7 @@ const News = () => {
         title="School News & Events — St. Mary's Bomet"
         description="Latest happenings, achievements and events at St. Mary's Mixed Junior & Senior School Bomet — KCSE results, sports, music band, ICT lab and community stories."
       />
+      <CmsPage slug="news" fallback={<>
 
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-50" />
@@ -110,6 +112,7 @@ const News = () => {
           )}
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };

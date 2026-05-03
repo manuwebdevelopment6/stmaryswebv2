@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Bed, Trophy, Users, Music, Heart, Utensils, Shield, Sparkles, Cpu, Mic } from "lucide-react";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const SECTIONS = [
   {
@@ -63,6 +64,7 @@ const SchoolLifePage = () => (
       title="School Life — Boarding, Sports, Music & ICT | St. Mary's Bomet"
       description="Discover student life at St. Mary's Bomet: boarding, sports, the National Finals music band, debate, drama, the ICT Innovation Lab and a vibrant 500+ student community."
     />
+    <CmsPage slug="school-life" fallback={<>
 
     <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-mesh opacity-60" />
@@ -110,6 +112,7 @@ const SchoolLifePage = () => (
         </div>
       </section>
     ))}
+    </>} />
   </SiteLayout>
 );
 

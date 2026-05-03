@@ -5,6 +5,7 @@ import { Seo } from "@/components/site/Seo";
 import { FileText, Download, Search, Lock, Calendar, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 type Doc = {
   id: string;
@@ -72,6 +73,7 @@ const ExamDownloads = () => {
         title="Exam Downloads — Past Papers & Notes | St. Mary's Bomet"
         description="Download CBC past papers, marking schemes and study notes for Grade 7-10 and Form 3-4 students at St. Mary's Mixed Junior & Senior School Bomet."
       />
+      <CmsPage slug="exam-downloads" fallback={<>
 
       {/* Hero */}
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-20 overflow-hidden">
@@ -239,6 +241,7 @@ const ExamDownloads = () => {
           </div>
         </div>
       </section>
+      </>} />
     </SiteLayout>
   );
 };

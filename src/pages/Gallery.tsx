@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Seo } from "@/components/site/Seo";
 import { Camera, Image as ImageIcon, Calendar, MapPin, X } from "lucide-react";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const STATS = [
   { v: "2,800+", l: "Photos", sub: "growing weekly" },
@@ -137,6 +138,7 @@ const Gallery = () => {
         title="Gallery — Photos & Videos | St. Mary's Bomet"
         description="Explore St. Mary's Bomet through photos: graduation, sports, music band, classroom life, boarding and community events. Updated weekly."
       />
+      <CmsPage slug="gallery" fallback={<>
 
       {/* Hero */}
       <section className="relative bg-primary-deep text-primary-foreground pt-40 pb-20 overflow-hidden">
@@ -316,6 +318,7 @@ const Gallery = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      </>} />
     </SiteLayout>
   );
 };

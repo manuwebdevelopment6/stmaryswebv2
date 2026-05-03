@@ -7,6 +7,7 @@ import { SchoolLife } from "@/components/sections/SchoolLife";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { NewsTeaser } from "@/components/sections/NewsTeaser";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { CmsPage } from "@/components/cms/CmsPage";
 
 const Index = () => (
   <SiteLayout>
@@ -15,6 +16,7 @@ const Index = () => (
       description="A Catholic Diocese of Kericho school offering exceptional CBE education from Grade 7 through Grade 10. 500+ students, 98% university admission, 35+ years of excellence in Bomet."
       canonical={typeof window !== 'undefined' ? window.location.origin + '/' : undefined}
     />
+    <CmsPage slug="home" fallback={<>
     <Hero />
     <StatsBand />
     <SchoolLife />
@@ -24,5 +26,6 @@ const Index = () => (
     <CtaBand />
   </SiteLayout>
 );
+    </>} />
 
 export default Index;
