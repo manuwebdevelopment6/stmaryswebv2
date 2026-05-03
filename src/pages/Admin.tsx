@@ -435,6 +435,129 @@ const Field = ({ label, value }: { label: string; value: string | null | undefin
   </div>
 );
 
+type Doc = { name: string; path: string; size?: number };
+
+const DocumentsViewer = ({ docs }: { docs: Doc[] }) => {
+  const [preview, setPreview] = useState<{ doc: Doc; url: string } | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+
+  if (!docs.length) {
+    return <p className="text-sm text-muted-foreground italic">No documents uploaded.</p>;
+  }
+
+  const sign = async (path: string) => {
+    const { data, error } = await supabase.storage
+      .from("application-documents")
+      .createSignedUrl(path, 300);
+    if (error || !data) { toast.error(error?.message ?? "Failed to get URL"); return null; }
+    return data.signedUrl;
+  };
+
+  const openPreview = async (doc: Doc) => {
+    setBusy(doc.path);
+    const url = await sign(doc.path);
+    setBusy(null);
+    if (url) setPreview({ doc, url });
+  };
+
+  const download = async (doc: Doc) => {
+    setBusy(doc.path);
+    try {
+      const { data, error } = await supabase.storage
+        .from("application-documents")
+        .download(doc.path);
+      if (error || !data) { toast.error(error?.message ?? "Download failed"); return; }
+      const blobUrl = URL.createObjectURL(data);
+      const a = document.createElement("a");
+      a.href = blobUrl; a.download = doc.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(blobUrl);
+    } finally { setBusy(null); }
+  };
+
+  const fmtSize = (n?: number) => {
+    if (!n) return "";
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  };
+
+  const isImage = (n: string) => /\.(jpe?g|png|gif|webp)$/i.test(n);
+  const isPdf = (n: string) => /\.pdf$/i.test(n);
+
+  return (
+    <>
+      <ul className="space-y-2">
+        {docs.map((d) => {
+          const Icon = isImage(d.name) ? FileImage : isPdf(d.name) ? FileText : FileIcon;
+          return (
+            <li key={d.path} className="flex items-center gap-3 rounded-lg border border-border bg-card/50 p-3 hover:bg-muted/40 transition-colors">
+              <div className="grid place-items-center h-9 w-9 rounded-md bg-primary/10 text-primary shrink-0">
+                <Icon className="h-4 w-4" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-sm font-medium text-foreground truncate">{d.name}</div>
+                <div className="text-xs text-muted-foreground">{fmtSize(d.size)}</div>
+              </div>
+              <Button size="sm" variant="ghost" onClick={() => openPreview(d)} disabled={busy === d.path}>
+                {busy === d.path ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Eye className="h-3.5 w-3.5" />}
+                <span className="hidden sm:inline">View</span>
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => download(d)} disabled={busy === d.path}>
+                <Download className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Download</span>
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}>
+        <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 flex flex-col">
+          <DialogHeader className="px-5 py-3 border-b border-border">
+            <DialogTitle className="font-display flex items-center justify-between gap-3 text-base">
+              <span className="truncate">{preview?.doc.name}</span>
+              {preview && (
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <Button size="sm" variant="outline" asChild>
+                    <a href={preview.url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-3.5 w-3.5" /> Open
+                    </a>
+                  </Button>
+                  <Button size="sm" variant="default" onClick={() => download(preview.doc)}>
+                    <Download className="h-3.5 w-3.5" /> Download
+                  </Button>
+                </div>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 overflow-auto bg-muted/30">
+            {preview && (
+              isImage(preview.doc.name) ? (
+                <div className="h-full w-full grid place-items-center p-4">
+                  <img src={preview.url} alt={preview.doc.name} className="max-h-full max-w-full rounded-lg shadow-elevated" />
+                </div>
+              ) : isPdf(preview.doc.name) ? (
+                <iframe src={preview.url} title={preview.doc.name} className="w-full h-full bg-white" />
+              ) : (
+                <div className="h-full grid place-items-center p-8 text-center">
+                  <div>
+                    <FileIcon className="h-12 w-12 mx-auto text-muted-foreground mb-3" />
+                    <p className="text-sm text-muted-foreground">Preview not available for this file type.</p>
+                    <Button className="mt-4" onClick={() => download(preview.doc)}>
+                      <Download className="h-4 w-4" /> Download to view
+                    </Button>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
 // ============== ROLES ==============
 const ROLES: AppRole[] = ["admin", "staff", "parent", "student", "alumnus"];
 
