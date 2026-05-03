@@ -386,6 +386,12 @@ const ApplicationsTable = ({ isAdmin }: { isAdmin: boolean }) => {
                     <p className="mt-1 text-sm text-foreground whitespace-pre-wrap">{viewing.notes}</p>
                   </div>
                 )}
+                <div className="sm:col-span-2 border-t border-border pt-3 mt-2">
+                  <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1.5">
+                    <Paperclip className="h-3 w-3" /> Uploaded Documents
+                  </div>
+                  <DocumentsViewer docs={viewing.document_paths ?? []} />
+                </div>
               </div>
 
               <DialogFooter className="mt-6 flex-wrap gap-2 sm:gap-2">
