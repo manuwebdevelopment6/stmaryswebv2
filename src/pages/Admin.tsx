@@ -47,6 +47,7 @@ type Application = {
   boarding_preference: string | null;
   intended_form: string | null;
   notes: string | null;
+  document_paths: { name: string; path: string; size?: number }[] | null;
   submitted_at: string | null;
   updated_at: string;
   created_at: string;
