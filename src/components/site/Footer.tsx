@@ -22,6 +22,7 @@ const COLS = [
       { label: "Photo Gallery", to: "/gallery" },
       { label: "Exam Downloads", to: "/exam-downloads" },
       { label: "Student Portal", to: "/portal" },
+      { label: "FAQ", to: "/faq" },
       { label: "Contact", to: "/contact" },
     ],
   },
