@@ -51,6 +51,10 @@ const App = () => (
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/pages" element={<PagesList />} />
               <Route path="/admin/pages/:slug" element={<PageEditor />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/accessibility" element={<Accessibility />} />
               <Route path="/auth" element={<Auth />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
