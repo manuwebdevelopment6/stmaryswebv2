@@ -20,6 +20,10 @@ import StudentPortal from "./pages/StudentPortal.tsx";
 import Admin from "./pages/Admin.tsx";
 import PagesList from "./pages/admin/PagesList.tsx";
 import PageEditor from "./pages/admin/PageEditor.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import Terms from "./pages/Terms.tsx";
+import Faq from "./pages/Faq.tsx";
+import Accessibility from "./pages/Accessibility.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
