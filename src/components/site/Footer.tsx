@@ -214,9 +214,11 @@ export const Footer = () => {
           <p>
             © {new Date().getFullYear()} <span className="text-primary-foreground/85 font-medium">St. Mary's Mixed Junior & Senior School, Bomet</span> · A Catholic Diocese of Kericho institution.
           </p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-x-5 gap-y-2 justify-center sm:justify-end">
             <Link to="/privacy" className="hover:text-accent transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-accent transition-colors">Terms</Link>
+            <Link to="/accessibility" className="hover:text-accent transition-colors">Accessibility</Link>
+            <Link to="/faq" className="hover:text-accent transition-colors">FAQ</Link>
             <Link to="/contact" className="hover:text-accent transition-colors">Contact</Link>
             <Link to="/auth" className="hover:text-accent transition-colors">Staff Sign-in</Link>
           </div>
