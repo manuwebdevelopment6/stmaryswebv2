@@ -21,57 +21,162 @@ const LEVELS = [
   { id: "844", students: "100+", grade: "Form 3 – 4", title: "High School (8-4-4)", body: "The legacy 8-4-4 system cohort for girls — currently Form 3 & 4.", points: ["KCSE preparation", "Leadership development", "Community service", "University prep"], duration: "Closing cohort" },
 ];
 
+const CORE_SUBJECTS = ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"];
+
 const PATHWAYS = [
   {
     id: "stem",
     label: "STEM",
     icon: FlaskConical,
-    desc: "Science, Technology, Engineering & Mathematics — for engineering, medical and tech careers.",
-    careers: ["Software Engineer", "Doctor", "Civil Engineer", "Data Scientist", "Pharmacist", "Researcher", "Architect", "Biotechnologist"],
-    combos: [
-      "Mathematics + Physics + Chemistry",
-      "Biology + Chemistry + Mathematics",
-      "Biology + Chemistry + Physics",
-      "Biology + Chemistry + Geography",
-      "Biology + Chemistry + Home Science",
-      "Biology + Chemistry + Agriculture",
-      "Mathematics + Physics + Computer Studies",
-      "Mathematics + Physics + Geography",
-      "General Science + Mathematics + Agriculture",
+    desc: "Science, Technology, Engineering & Mathematics — for engineering, medical, computing and research careers.",
+    tracks: [
+      {
+        id: "pure-sciences",
+        name: "Pure Sciences Track",
+        careers: [
+          "Doctor", "Pharmacist", "Biotechnologist", "Medical Researcher", "Veterinarian",
+          "Microbiologist", "Lab Scientist", "Nutritionist", "Public Health Officer", "Dentist",
+          "Forensic Scientist", "Geneticist", "Marine Biologist", "Optometrist", "Radiologist",
+          "Anesthesiologist", "Surgeon", "Epidemiologist", "Clinical Officer", "Nurse",
+        ],
+        combos: [
+          "Biology + Chemistry + Mathematics",
+          "Biology + Chemistry + Physics",
+          "Biology + Chemistry + Geography",
+          "Biology + Chemistry + Home Science",
+          "Biology + Chemistry + Agriculture",
+        ],
+      },
+      {
+        id: "engineering",
+        name: "Engineering & Technology Track",
+        careers: [
+          "Software Engineer", "Civil Engineer", "Electrical Engineer", "Mechanical Engineer",
+          "Data Scientist", "Architect", "Aerospace Engineer", "Robotics Engineer",
+          "Cybersecurity Analyst", "AI Researcher", "Cloud Architect", "Network Engineer",
+          "DevOps Engineer", "Mobile Developer", "Game Developer", "Hardware Engineer",
+          "Systems Analyst", "Quantity Surveyor", "Mining Engineer", "Telecoms Engineer",
+        ],
+        combos: [
+          "Mathematics + Physics + Chemistry",
+          "Mathematics + Physics + Computer Studies",
+          "Mathematics + Physics + Geography",
+          "Advanced Mathematics + Physics + Computer Studies",
+        ],
+      },
+      {
+        id: "applied",
+        name: "Applied & Earth Sciences Track",
+        careers: [
+          "Agronomist", "Environmental Scientist", "Geologist", "Meteorologist",
+          "Conservationist", "Surveyor", "Agribusiness Manager", "Food Scientist",
+          "Soil Scientist", "Hydrologist", "GIS Specialist", "Wildlife Manager",
+        ],
+        combos: [
+          "General Science + Mathematics + Agriculture",
+          "Biology + Geography + Agriculture",
+          "Mathematics + Geography + Computer Studies",
+        ],
+      },
     ],
   },
   {
     id: "social",
     label: "Social Sciences",
     icon: Globe,
-    desc: "Languages, Humanities & Business — for law, journalism, business and teaching careers.",
-    careers: ["Lawyer", "Journalist", "Diplomat", "Economist", "Teacher", "Public Administrator", "Marketing Manager", "Entrepreneur"],
-    combos: [
-      "History & Citizenship + Geography + CRE",
-      "History & Citizenship + Geography + Business Studies",
-      "Business Studies + Mathematics + Geography",
-      "Business Studies + Mathematics + Computer Studies",
-      "Business Studies + CRE + Kiswahili / Literature",
-      "Literature + Kiswahili Lugha na Fasihi + History",
-      "Literature + History + French / German / Arabic",
-      "Geography + CRE + Kiswahili Lugha na Fasihi",
-      "Advanced English + Literature + History",
+    desc: "Languages, Humanities & Business — for law, journalism, diplomacy, business and teaching careers.",
+    tracks: [
+      {
+        id: "humanities",
+        name: "Humanities Track",
+        careers: [
+          "Lawyer", "Diplomat", "Historian", "Sociologist", "Anthropologist",
+          "Religious Leader", "Counsellor", "Public Administrator", "Policy Analyst",
+          "Foreign Service Officer", "NGO Programme Officer", "Curator", "Archaeologist",
+          "Political Scientist", "Civic Educator", "Researcher", "Author", "Journalist",
+          "Editor", "University Lecturer",
+        ],
+        combos: [
+          "History & Citizenship + Geography + CRE",
+          "History & Citizenship + Geography + Business Studies",
+          "Geography + CRE + Kiswahili Lugha na Fasihi",
+          "Literature + History + CRE",
+        ],
+      },
+      {
+        id: "business",
+        name: "Business & Economics Track",
+        careers: [
+          "Economist", "Accountant", "Banker", "Marketing Manager", "Entrepreneur",
+          "Investment Analyst", "Auditor", "Insurance Broker", "Tax Consultant",
+          "HR Manager", "Supply Chain Manager", "Procurement Officer",
+          "Business Consultant", "Stockbroker", "Actuary", "Project Manager",
+        ],
+        combos: [
+          "Business Studies + Mathematics + Geography",
+          "Business Studies + Mathematics + Computer Studies",
+          "Business Studies + CRE + Kiswahili / Literature",
+          "Business Studies + Geography + Agriculture",
+        ],
+      },
+      {
+        id: "languages",
+        name: "Languages & Literature Track",
+        careers: [
+          "Translator", "Interpreter", "Foreign Correspondent", "Tour Guide",
+          "Diplomatic Attaché", "Language Teacher", "Linguist", "Editor",
+          "Publisher", "Speech Writer", "Communications Officer", "Copywriter",
+        ],
+        combos: [
+          "Literature + Kiswahili Lugha na Fasihi + History",
+          "Literature + History + French / German / Arabic",
+          "Advanced English + Literature + History",
+          "Kiswahili + French + Literature",
+        ],
+      },
     ],
   },
   {
     id: "arts",
     label: "Arts & Sports",
     icon: Palette,
-    desc: "Creative Arts and Sports & Recreation — for media, performing arts and sports careers.",
-    careers: ["Creative Director", "Sports Manager", "Theatre Director", "Athletic Coach", "Graphic Designer", "Sports Nutritionist", "Musician", "Film Producer"],
-    combos: [
-      "Fine Art + Theatre & Film + Literature",
-      "Music & Dance + Theatre & Film + Literature",
-      "Music & Dance + Fine Art + French",
-      "Sports & Recreation + Biology + Nutrition",
-      "Sports & Recreation + Geography + Business Studies",
-      "Sports & Recreation + Computer Studies + Mathematics",
-      "Theatre & Film + Computer Studies + Business Studies",
+    desc: "Creative Arts and Sports & Recreation — for media, performing arts, design, coaching and sports careers.",
+    tracks: [
+      {
+        id: "arts-track",
+        name: "Arts Track",
+        careers: [
+          "Creative Director", "Film Producer", "Writer", "Artist", "Cultural Ambassador",
+          "Art Therapist", "Museum Curator", "Graphic Designer", "Animation Director",
+          "Theatre Director", "Art Gallery Manager", "Creative Writing Teacher",
+          "Film Editor", "Costume Designer", "Set Designer", "Arts Administrator",
+          "Digital Media Specialist", "Content Creator", "Brand Designer", "Illustrator",
+        ],
+        combos: [
+          "Fine Art + Theatre & Film + Literature in English",
+          "Theatre & Film + Music & Dance + French",
+          "Theatre & Film + Music & Dance + German",
+          "Fine Art + Music & Dance + Literature in English",
+        ],
+      },
+      {
+        id: "sports-track",
+        name: "Sports & Recreation Track",
+        careers: [
+          "Sports Management", "Athletic Training", "Sports Medicine", "Recreation Therapy",
+          "Fitness Instructor", "Sports Psychologist", "Physical Education Teacher",
+          "Sports Journalist", "Sports Marketing Manager", "Athletic Director",
+          "Sports Nutritionist", "Physiotherapist", "Sports Event Coordinator",
+          "Fitness Center Manager", "Sports Equipment Designer", "Sports Analyst",
+          "Olympic Coach", "Sports Broadcaster", "Wellness Consultant", "Yoga Instructor",
+        ],
+        combos: [
+          "Sports & Recreation + Biology + Computer Studies",
+          "Sports & Recreation + Biology + Mandarin",
+          "Sports & Recreation + Biology + Advanced Mathematics",
+          "Sports & Recreation + Geography + Business Studies",
+        ],
+      },
     ],
   },
 ];
