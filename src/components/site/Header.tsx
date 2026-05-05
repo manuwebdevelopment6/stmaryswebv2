@@ -149,12 +149,56 @@ export const Header = () => {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="lg:hidden absolute inset-x-0 top-20 bg-background border-b border-border shadow-elevated animate-fade-in-up">
+        <div className="lg:hidden absolute inset-x-0 top-20 bg-background border-b border-border shadow-elevated animate-fade-in-up max-h-[calc(100vh-5rem)] overflow-y-auto">
           <nav className="container-prose py-4 flex flex-col" aria-label="Mobile">
             {NAV.map((n) => (
-              <Link key={n.to} to={n.to} className="py-3 border-b border-border text-base font-medium text-foreground">
-                {n.label}
-              </Link>
+              <div key={n.to} className="border-b border-border">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (n.children) {
+                      setOpenMenu((cur) => (cur === n.label ? null : n.label));
+                    } else {
+                      navigate(n.to);
+                      setOpen(false);
+                    }
+                  }}
+                  className="w-full flex items-center justify-between py-3 text-left text-base font-medium text-foreground"
+                  aria-expanded={openMenu === n.label}
+                >
+                  <span>{n.label}</span>
+                  {n.children && (
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform",
+                        openMenu === n.label && "rotate-180"
+                      )}
+                    />
+                  )}
+                </button>
+                {n.children && openMenu === n.label && (
+                  <div className="pb-3 pl-2 flex flex-col gap-1">
+                    <Link
+                      to={n.to}
+                      onClick={() => setOpen(false)}
+                      className="px-2 py-2 text-sm font-semibold text-primary"
+                    >
+                      Overview
+                    </Link>
+                    {n.children.map((c) => (
+                      <Link
+                        key={c.to}
+                        to={c.to}
+                        onClick={() => setOpen(false)}
+                        className="px-2 py-2 rounded-md hover:bg-secondary"
+                      >
+                        <div className="text-sm font-semibold text-foreground">{c.label}</div>
+                        <div className="text-xs text-muted-foreground">{c.desc}</div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <div className="flex gap-2 pt-4 items-center">
               <ThemeToggle />
