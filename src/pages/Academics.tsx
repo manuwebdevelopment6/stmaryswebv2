@@ -21,57 +21,162 @@ const LEVELS = [
   { id: "844", students: "100+", grade: "Form 3 – 4", title: "High School (8-4-4)", body: "The legacy 8-4-4 system cohort for girls — currently Form 3 & 4.", points: ["KCSE preparation", "Leadership development", "Community service", "University prep"], duration: "Closing cohort" },
 ];
 
+const CORE_SUBJECTS = ["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"];
+
 const PATHWAYS = [
   {
     id: "stem",
     label: "STEM",
     icon: FlaskConical,
-    desc: "Science, Technology, Engineering & Mathematics — for engineering, medical and tech careers.",
-    careers: ["Software Engineer", "Doctor", "Civil Engineer", "Data Scientist", "Pharmacist", "Researcher", "Architect", "Biotechnologist"],
-    combos: [
-      "Mathematics + Physics + Chemistry",
-      "Biology + Chemistry + Mathematics",
-      "Biology + Chemistry + Physics",
-      "Biology + Chemistry + Geography",
-      "Biology + Chemistry + Home Science",
-      "Biology + Chemistry + Agriculture",
-      "Mathematics + Physics + Computer Studies",
-      "Mathematics + Physics + Geography",
-      "General Science + Mathematics + Agriculture",
+    desc: "Science, Technology, Engineering & Mathematics — for engineering, medical, computing and research careers.",
+    tracks: [
+      {
+        id: "pure-sciences",
+        name: "Pure Sciences Track",
+        careers: [
+          "Doctor", "Pharmacist", "Biotechnologist", "Medical Researcher", "Veterinarian",
+          "Microbiologist", "Lab Scientist", "Nutritionist", "Public Health Officer", "Dentist",
+          "Forensic Scientist", "Geneticist", "Marine Biologist", "Optometrist", "Radiologist",
+          "Anesthesiologist", "Surgeon", "Epidemiologist", "Clinical Officer", "Nurse",
+        ],
+        combos: [
+          "Biology + Chemistry + Mathematics",
+          "Biology + Chemistry + Physics",
+          "Biology + Chemistry + Geography",
+          "Biology + Chemistry + Home Science",
+          "Biology + Chemistry + Agriculture",
+        ],
+      },
+      {
+        id: "engineering",
+        name: "Engineering & Technology Track",
+        careers: [
+          "Software Engineer", "Civil Engineer", "Electrical Engineer", "Mechanical Engineer",
+          "Data Scientist", "Architect", "Aerospace Engineer", "Robotics Engineer",
+          "Cybersecurity Analyst", "AI Researcher", "Cloud Architect", "Network Engineer",
+          "DevOps Engineer", "Mobile Developer", "Game Developer", "Hardware Engineer",
+          "Systems Analyst", "Quantity Surveyor", "Mining Engineer", "Telecoms Engineer",
+        ],
+        combos: [
+          "Mathematics + Physics + Chemistry",
+          "Mathematics + Physics + Computer Studies",
+          "Mathematics + Physics + Geography",
+          "Advanced Mathematics + Physics + Computer Studies",
+        ],
+      },
+      {
+        id: "applied",
+        name: "Applied & Earth Sciences Track",
+        careers: [
+          "Agronomist", "Environmental Scientist", "Geologist", "Meteorologist",
+          "Conservationist", "Surveyor", "Agribusiness Manager", "Food Scientist",
+          "Soil Scientist", "Hydrologist", "GIS Specialist", "Wildlife Manager",
+        ],
+        combos: [
+          "General Science + Mathematics + Agriculture",
+          "Biology + Geography + Agriculture",
+          "Mathematics + Geography + Computer Studies",
+        ],
+      },
     ],
   },
   {
     id: "social",
     label: "Social Sciences",
     icon: Globe,
-    desc: "Languages, Humanities & Business — for law, journalism, business and teaching careers.",
-    careers: ["Lawyer", "Journalist", "Diplomat", "Economist", "Teacher", "Public Administrator", "Marketing Manager", "Entrepreneur"],
-    combos: [
-      "History & Citizenship + Geography + CRE",
-      "History & Citizenship + Geography + Business Studies",
-      "Business Studies + Mathematics + Geography",
-      "Business Studies + Mathematics + Computer Studies",
-      "Business Studies + CRE + Kiswahili / Literature",
-      "Literature + Kiswahili Lugha na Fasihi + History",
-      "Literature + History + French / German / Arabic",
-      "Geography + CRE + Kiswahili Lugha na Fasihi",
-      "Advanced English + Literature + History",
+    desc: "Languages, Humanities & Business — for law, journalism, diplomacy, business and teaching careers.",
+    tracks: [
+      {
+        id: "humanities",
+        name: "Humanities Track",
+        careers: [
+          "Lawyer", "Diplomat", "Historian", "Sociologist", "Anthropologist",
+          "Religious Leader", "Counsellor", "Public Administrator", "Policy Analyst",
+          "Foreign Service Officer", "NGO Programme Officer", "Curator", "Archaeologist",
+          "Political Scientist", "Civic Educator", "Researcher", "Author", "Journalist",
+          "Editor", "University Lecturer",
+        ],
+        combos: [
+          "History & Citizenship + Geography + CRE",
+          "History & Citizenship + Geography + Business Studies",
+          "Geography + CRE + Kiswahili Lugha na Fasihi",
+          "Literature + History + CRE",
+        ],
+      },
+      {
+        id: "business",
+        name: "Business & Economics Track",
+        careers: [
+          "Economist", "Accountant", "Banker", "Marketing Manager", "Entrepreneur",
+          "Investment Analyst", "Auditor", "Insurance Broker", "Tax Consultant",
+          "HR Manager", "Supply Chain Manager", "Procurement Officer",
+          "Business Consultant", "Stockbroker", "Actuary", "Project Manager",
+        ],
+        combos: [
+          "Business Studies + Mathematics + Geography",
+          "Business Studies + Mathematics + Computer Studies",
+          "Business Studies + CRE + Kiswahili / Literature",
+          "Business Studies + Geography + Agriculture",
+        ],
+      },
+      {
+        id: "languages",
+        name: "Languages & Literature Track",
+        careers: [
+          "Translator", "Interpreter", "Foreign Correspondent", "Tour Guide",
+          "Diplomatic Attaché", "Language Teacher", "Linguist", "Editor",
+          "Publisher", "Speech Writer", "Communications Officer", "Copywriter",
+        ],
+        combos: [
+          "Literature + Kiswahili Lugha na Fasihi + History",
+          "Literature + History + French / German / Arabic",
+          "Advanced English + Literature + History",
+          "Kiswahili + French + Literature",
+        ],
+      },
     ],
   },
   {
     id: "arts",
     label: "Arts & Sports",
     icon: Palette,
-    desc: "Creative Arts and Sports & Recreation — for media, performing arts and sports careers.",
-    careers: ["Creative Director", "Sports Manager", "Theatre Director", "Athletic Coach", "Graphic Designer", "Sports Nutritionist", "Musician", "Film Producer"],
-    combos: [
-      "Fine Art + Theatre & Film + Literature",
-      "Music & Dance + Theatre & Film + Literature",
-      "Music & Dance + Fine Art + French",
-      "Sports & Recreation + Biology + Nutrition",
-      "Sports & Recreation + Geography + Business Studies",
-      "Sports & Recreation + Computer Studies + Mathematics",
-      "Theatre & Film + Computer Studies + Business Studies",
+    desc: "Creative Arts and Sports & Recreation — for media, performing arts, design, coaching and sports careers.",
+    tracks: [
+      {
+        id: "arts-track",
+        name: "Arts Track",
+        careers: [
+          "Creative Director", "Film Producer", "Writer", "Artist", "Cultural Ambassador",
+          "Art Therapist", "Museum Curator", "Graphic Designer", "Animation Director",
+          "Theatre Director", "Art Gallery Manager", "Creative Writing Teacher",
+          "Film Editor", "Costume Designer", "Set Designer", "Arts Administrator",
+          "Digital Media Specialist", "Content Creator", "Brand Designer", "Illustrator",
+        ],
+        combos: [
+          "Fine Art + Theatre & Film + Literature in English",
+          "Theatre & Film + Music & Dance + French",
+          "Theatre & Film + Music & Dance + German",
+          "Fine Art + Music & Dance + Literature in English",
+        ],
+      },
+      {
+        id: "sports-track",
+        name: "Sports & Recreation Track",
+        careers: [
+          "Sports Management", "Athletic Training", "Sports Medicine", "Recreation Therapy",
+          "Fitness Instructor", "Sports Psychologist", "Physical Education Teacher",
+          "Sports Journalist", "Sports Marketing Manager", "Athletic Director",
+          "Sports Nutritionist", "Physiotherapist", "Sports Event Coordinator",
+          "Fitness Center Manager", "Sports Equipment Designer", "Sports Analyst",
+          "Olympic Coach", "Sports Broadcaster", "Wellness Consultant", "Yoga Instructor",
+        ],
+        combos: [
+          "Sports & Recreation + Biology + Computer Studies",
+          "Sports & Recreation + Biology + Mandarin",
+          "Sports & Recreation + Biology + Advanced Mathematics",
+          "Sports & Recreation + Geography + Business Studies",
+        ],
+      },
     ],
   },
 ];
@@ -214,44 +319,78 @@ const Academics = () => {
           </div>
 
           <motion.div key={active.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="grid lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-5 rounded-2xl bg-primary-deep text-primary-foreground p-8 relative overflow-hidden">
+            <div className="lg:col-span-4 rounded-2xl bg-primary-deep text-primary-foreground p-8 relative overflow-hidden self-start lg:sticky lg:top-28">
               <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
               <div className="relative">
                 <div className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-accent-foreground mb-5"><active.icon className="h-7 w-7" /></div>
-                <h3 className="font-display text-2xl font-bold">{active.label} Track</h3>
-                <p className="mt-3 text-primary-foreground/85 leading-relaxed">{active.desc}</p>
+                <h3 className="font-display text-2xl font-bold">{active.label}</h3>
+                <p className="mt-3 text-primary-foreground/85 leading-relaxed text-sm">{active.desc}</p>
                 <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">Core Subjects (Required)</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"].map(s => (
+                  {CORE_SUBJECTS.map(s => (
                     <span key={s} className="px-3 py-1.5 rounded-md bg-primary-foreground/10 text-xs font-medium">{s}</span>
                   ))}
                 </div>
+                <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">Tracks in this Pathway</p>
+                <ul className="mt-3 space-y-1.5">
+                  {active.tracks.map(t => (
+                    <li key={t.id} className="text-sm text-primary-foreground/90 flex items-start gap-2">
+                      <span className="text-accent mt-0.5">▸</span>{t.name}
+                    </li>
+                  ))}
+                </ul>
                 <Button asChild variant="hero" className="mt-7" size="sm">
                   <Link to="/admissions">Apply for {active.label} <ArrowRight className="h-3.5 w-3.5" /></Link>
                 </Button>
               </div>
             </div>
 
-            <div className="lg:col-span-7 grid gap-5">
-              <div className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-display font-semibold text-foreground flex items-center gap-2"><Trophy className="h-4 w-4 text-accent" /> Career Opportunities <span className="text-xs font-mono text-muted-foreground">20+ careers</span></h4>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {active.careers.map(c => (
-                    <span key={c} className="px-3 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-medium">{c}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-display font-semibold text-foreground flex items-center gap-2"><Layers className="h-4 w-4 text-accent" /> Subject Combinations</h4>
-                <div className="mt-4 space-y-3">
-                  {active.combos.map((c, i) => (
-                    <div key={c} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40">
-                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-gradient-cyan text-accent-foreground font-mono text-xs font-bold">{i + 1}</span>
-                      <p className="text-sm text-foreground pt-1">{c}</p>
+            <div className="lg:col-span-8 grid gap-6">
+              {active.tracks.map((track, ti) => (
+                <motion.div
+                  key={track.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: ti * 0.08 }}
+                  className="rounded-2xl border border-border bg-card overflow-hidden"
+                >
+                  <div className="flex items-center justify-between gap-3 px-6 py-4 bg-secondary/40 border-b border-border">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-cyan text-accent-foreground font-mono text-xs font-bold">{ti + 1}</span>
+                      <h4 className="font-display text-lg font-semibold text-foreground">{track.name}</h4>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{active.label}</span>
+                  </div>
+                  <div className="p-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-display text-sm font-semibold text-foreground flex items-center gap-2">
+                        <Trophy className="h-4 w-4 text-accent" /> Career Opportunities
+                        <span className="text-[10px] font-mono text-muted-foreground">{track.careers.length}+ careers</span>
+                      </h5>
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {track.careers.map(c => (
+                          <span key={c} className="px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-medium">{c}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h5 className="font-display text-sm font-semibold text-foreground flex items-center gap-2">
+                        <Layers className="h-4 w-4 text-accent" /> Subject Combinations
+                        <span className="text-[10px] font-mono text-muted-foreground">{track.combos.length} options</span>
+                      </h5>
+                      <div className="mt-3 space-y-2">
+                        {track.combos.map((c, i) => (
+                          <div key={c} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-secondary/40">
+                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-primary font-mono text-[10px] font-bold">{i + 1}</span>
+                            <p className="text-sm text-foreground pt-0.5">{c}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
