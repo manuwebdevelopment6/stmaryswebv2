@@ -319,44 +319,78 @@ const Academics = () => {
           </div>
 
           <motion.div key={active.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="grid lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-5 rounded-2xl bg-primary-deep text-primary-foreground p-8 relative overflow-hidden">
+            <div className="lg:col-span-4 rounded-2xl bg-primary-deep text-primary-foreground p-8 relative overflow-hidden self-start lg:sticky lg:top-28">
               <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
               <div className="relative">
                 <div className="grid h-14 w-14 place-items-center rounded-2xl bg-accent text-accent-foreground mb-5"><active.icon className="h-7 w-7" /></div>
-                <h3 className="font-display text-2xl font-bold">{active.label} Track</h3>
-                <p className="mt-3 text-primary-foreground/85 leading-relaxed">{active.desc}</p>
+                <h3 className="font-display text-2xl font-bold">{active.label}</h3>
+                <p className="mt-3 text-primary-foreground/85 leading-relaxed text-sm">{active.desc}</p>
                 <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">Core Subjects (Required)</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {["English", "Kiswahili", "Core/Essential Mathematics", "Physical Education"].map(s => (
+                  {CORE_SUBJECTS.map(s => (
                     <span key={s} className="px-3 py-1.5 rounded-md bg-primary-foreground/10 text-xs font-medium">{s}</span>
                   ))}
                 </div>
+                <p className="mt-6 font-mono text-xs uppercase tracking-widest text-accent">Tracks in this Pathway</p>
+                <ul className="mt-3 space-y-1.5">
+                  {active.tracks.map(t => (
+                    <li key={t.id} className="text-sm text-primary-foreground/90 flex items-start gap-2">
+                      <span className="text-accent mt-0.5">▸</span>{t.name}
+                    </li>
+                  ))}
+                </ul>
                 <Button asChild variant="hero" className="mt-7" size="sm">
                   <Link to="/admissions">Apply for {active.label} <ArrowRight className="h-3.5 w-3.5" /></Link>
                 </Button>
               </div>
             </div>
 
-            <div className="lg:col-span-7 grid gap-5">
-              <div className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-display font-semibold text-foreground flex items-center gap-2"><Trophy className="h-4 w-4 text-accent" /> Career Opportunities <span className="text-xs font-mono text-muted-foreground">20+ careers</span></h4>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {active.careers.map(c => (
-                    <span key={c} className="px-3 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-medium">{c}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="rounded-2xl border border-border bg-card p-6">
-                <h4 className="font-display font-semibold text-foreground flex items-center gap-2"><Layers className="h-4 w-4 text-accent" /> Subject Combinations</h4>
-                <div className="mt-4 space-y-3">
-                  {active.combos.map((c, i) => (
-                    <div key={c} className="flex items-start gap-3 p-3 rounded-lg bg-secondary/40">
-                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-gradient-cyan text-accent-foreground font-mono text-xs font-bold">{i + 1}</span>
-                      <p className="text-sm text-foreground pt-1">{c}</p>
+            <div className="lg:col-span-8 grid gap-6">
+              {active.tracks.map((track, ti) => (
+                <motion.div
+                  key={track.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: ti * 0.08 }}
+                  className="rounded-2xl border border-border bg-card overflow-hidden"
+                >
+                  <div className="flex items-center justify-between gap-3 px-6 py-4 bg-secondary/40 border-b border-border">
+                    <div className="flex items-center gap-3">
+                      <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-cyan text-accent-foreground font-mono text-xs font-bold">{ti + 1}</span>
+                      <h4 className="font-display text-lg font-semibold text-foreground">{track.name}</h4>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{active.label}</span>
+                  </div>
+                  <div className="p-6 grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h5 className="font-display text-sm font-semibold text-foreground flex items-center gap-2">
+                        <Trophy className="h-4 w-4 text-accent" /> Career Opportunities
+                        <span className="text-[10px] font-mono text-muted-foreground">{track.careers.length}+ careers</span>
+                      </h5>
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {track.careers.map(c => (
+                          <span key={c} className="px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-medium">{c}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h5 className="font-display text-sm font-semibold text-foreground flex items-center gap-2">
+                        <Layers className="h-4 w-4 text-accent" /> Subject Combinations
+                        <span className="text-[10px] font-mono text-muted-foreground">{track.combos.length} options</span>
+                      </h5>
+                      <div className="mt-3 space-y-2">
+                        {track.combos.map((c, i) => (
+                          <div key={c} className="flex items-start gap-2.5 p-2.5 rounded-lg bg-secondary/40">
+                            <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 text-primary font-mono text-[10px] font-bold">{i + 1}</span>
+                            <p className="text-sm text-foreground pt-0.5">{c}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
