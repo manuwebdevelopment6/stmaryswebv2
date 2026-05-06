@@ -176,7 +176,7 @@ const StudentPortal = () => {
                   Need help with the portal?
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Talk to Stella (bottom-right) or contact the ICT office.
+                  Talk to Marian AI (bottom-right) or contact the ICT office.
                 </p>
               </div>
             </>
