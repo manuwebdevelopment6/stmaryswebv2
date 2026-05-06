@@ -212,7 +212,15 @@ export const Footer = () => {
       <div className="border-t border-primary-foreground/10 bg-primary-foreground/[0.03]">
         <div className="container-prose py-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] text-primary-foreground/55">
           <p>
-            © {new Date().getFullYear()} <span className="text-primary-foreground/85 font-medium">St. Mary's Mixed Junior & Senior School, Bomet</span> · A Catholic Diocese of Kericho institution.
+            © {new Date().getFullYear()} <span className="text-primary-foreground/85 font-medium">St. Mary's Mixed Junior & Senior School, Bomet</span> · A Catholic Diocese of Kericho institution. · Designed by{" "}
+            <a
+              href="https://manuebdesigns.lovable.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline font-medium"
+            >
+              Manueb Designs
+            </a>
           </p>
           <div className="flex flex-wrap gap-x-5 gap-y-2 justify-center sm:justify-end">
             <Link to="/privacy" className="hover:text-accent transition-colors">Privacy</Link>
