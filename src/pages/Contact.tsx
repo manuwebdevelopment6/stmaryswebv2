@@ -23,17 +23,29 @@ const DEPTS = [
   { label: "Principal's Office", email: "gabmache@gmail.com" },
 ];
 
+const FORM_EMAIL = "manuwebdesigns@gmail.com";
+const WHATSAPP_NUMBER = "254714749123";
+
 const Contact = () => {
   const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") || "");
+    const email = String(fd.get("email") || "");
+    const phone = String(fd.get("phone") || "");
+    const subject = String(fd.get("subject") || "General Inquiry");
+    const message = String(fd.get("message") || "");
+    const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`;
+    const mailto = `mailto:${FORM_EMAIL}?subject=${encodeURIComponent(`[St. Mary's Bomet] ${subject}`)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
     setTimeout(() => {
       setSubmitting(false);
       (e.target as HTMLFormElement).reset();
-      toast.success("Thank you! We'll be in touch within 1 working day.");
-    }, 700);
+      toast.success("Opening your email app — your message is ready to send.");
+    }, 600);
   };
 
   return (
@@ -120,14 +132,14 @@ const Contact = () => {
                 </div>
               </div>
             ))}
-            <a href="https://wa.me/254721771568" target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-gradient-cyan p-6 text-accent-foreground shadow-cyan hover:opacity-95 transition-opacity">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="block rounded-2xl bg-gradient-cyan p-6 text-accent-foreground shadow-cyan hover:opacity-95 transition-opacity">
               <div className="flex items-center gap-4">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-accent-foreground/15">
                   <MessageCircle className="h-5 w-5" />
                 </div>
                 <div>
                   <p className="font-display text-lg font-semibold leading-tight">Chat on WhatsApp</p>
-                  <p className="text-sm opacity-80">Fastest way to reach the admissions desk.</p>
+                  <p className="text-sm opacity-80">Fastest reply · 0714 749 123</p>
                 </div>
               </div>
             </a>
