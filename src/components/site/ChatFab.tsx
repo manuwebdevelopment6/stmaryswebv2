@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, X, Sparkles, Send, Loader2, RotateCcw } from "lucide-react";
+import { MessageCircle, X, Sparkles, Send, Loader2, RotateCcw, Copy, Check, Phone } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,21 +12,35 @@ const SUGGESTIONS = [
   "Ada za shule ni ngapi?",
   "What pathways are offered at Grade 10?",
   "Boarding au day scholar?",
+  "When is the next open day?",
+  "Tell me about the ICT lab",
 ];
 
-const STELLA_GREETING: Msg = {
+const GREETING: Msg = {
   role: "assistant",
   content:
-    "👋 Hi, I'm **Stella** — your St. Mary's assistant. Karibu! I can help with admissions, fees, CBE pathways, school life and contacts.\n\nAsk me anything in **English or Kiswahili**.",
+    "👋 Hello, I'm **Marian AI** — your St. Mary's Bomet assistant. *Karibu!*\n\nI can help with **admissions, fees, CBE pathways, school life, news and contacts**. Ask me anything in **English or Kiswahili** — I'll respond in the same language.",
 };
 
+const STORAGE_KEY = "marian-ai-history-v1";
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stella-chat`;
 
 export const ChatFab = () => {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([STELLA_GREETING]);
+  const [messages, setMessages] = useState<Msg[]>(() => {
+    if (typeof window === "undefined") return [GREETING];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as Msg[];
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch { /* ignore */ }
+    return [GREETING];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -35,6 +49,13 @@ export const ChatFab = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, open, loading]);
+
+  // Persist conversation
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-30)));
+    } catch { /* ignore quota */ }
+  }, [messages]);
 
   const send = async (text: string) => {
     const trimmed = text.trim();
@@ -60,16 +81,15 @@ export const ChatFab = () => {
           Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
         },
         body: JSON.stringify({
-          messages: next.filter((_, i) => !(i === 0 && next[0] === STELLA_GREETING)).map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: next
+            .filter((m, i) => !(i === 0 && m.role === "assistant" && m.content === GREETING.content))
+            .map((m) => ({ role: m.role, content: m.content })),
         }),
         signal: controller.signal,
       });
 
       if (resp.status === 429) {
-        toast.error("Stella is busy. Please try again in a moment.");
+        toast.error("Marian AI is busy. Please try again in a moment.");
         setLoading(false);
         return;
       }
@@ -79,7 +99,7 @@ export const ChatFab = () => {
         return;
       }
       if (!resp.ok || !resp.body) {
-        toast.error("Couldn't reach Stella. Please try again.");
+        toast.error("Couldn't reach Marian AI. Please try again.");
         setLoading(false);
         return;
       }
@@ -131,7 +151,7 @@ export const ChatFab = () => {
       }
 
       if (buffer.trim()) {
-        for (let raw of buffer.split("\n")) {
+        for (const raw of buffer.split("\n")) {
           if (!raw || raw.startsWith(":") || !raw.startsWith("data: ")) continue;
           const json = raw.slice(6).trim();
           if (json === "[DONE]") continue;
@@ -153,8 +173,8 @@ export const ChatFab = () => {
       }
     } catch (e) {
       if ((e as { name?: string })?.name !== "AbortError") {
-        console.error("stella stream error", e);
-        toast.error("Network error reaching Stella.");
+        console.error("marian-ai stream error", e);
+        toast.error("Network error reaching Marian AI.");
       }
     } finally {
       setLoading(false);
@@ -164,8 +184,20 @@ export const ChatFab = () => {
 
   const reset = () => {
     abortRef.current?.abort();
-    setMessages([STELLA_GREETING]);
+    setMessages([GREETING]);
     setInput("");
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+    toast.success("Conversation cleared");
+  };
+
+  const copyMsg = async (idx: number, text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedIdx(idx);
+      setTimeout(() => setCopiedIdx(null), 1500);
+    } catch {
+      toast.error("Couldn't copy");
+    }
   };
 
   return (
@@ -180,13 +212,13 @@ export const ChatFab = () => {
             </div>
             <div className="relative flex-1 min-w-0">
               <p className="font-display text-base font-semibold leading-tight flex items-center gap-2">
-                Stella
+                Marian AI
                 <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded bg-success/20 text-success">
                   <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" /> Online
                 </span>
               </p>
               <p className="text-xs text-primary-foreground/75">
-                School AI · English &amp; Kiswahili
+                School AI Assistant · English &amp; Kiswahili
               </p>
             </div>
             <button
@@ -212,24 +244,35 @@ export const ChatFab = () => {
               <div
                 key={i}
                 className={cn(
-                  "flex",
+                  "group flex",
                   m.role === "user" ? "justify-end" : "justify-start",
                 )}
               >
-                <div
-                  className={cn(
-                    "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-card",
-                    m.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-tr-sm"
-                      : "bg-card text-foreground border border-border rounded-tl-sm",
-                  )}
-                >
-                  {m.role === "assistant" ? (
-                    <div className="prose prose-sm max-w-none dark:prose-invert prose-p:my-2 prose-ul:my-2 prose-li:my-0.5 prose-headings:font-display prose-a:text-primary">
-                      <ReactMarkdown>{m.content || "…"}</ReactMarkdown>
-                    </div>
-                  ) : (
-                    <p className="whitespace-pre-wrap">{m.content}</p>
+                <div className="max-w-[85%] flex flex-col gap-1">
+                  <div
+                    className={cn(
+                      "rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-card",
+                      m.role === "user"
+                        ? "bg-primary text-primary-foreground rounded-tr-sm"
+                        : "bg-card text-foreground border border-border rounded-tl-sm",
+                    )}
+                  >
+                    {m.role === "assistant" ? (
+                      <div className="prose prose-sm max-w-none dark:prose-invert prose-p:my-2 prose-ul:my-2 prose-li:my-0.5 prose-headings:font-display prose-a:text-primary">
+                        <ReactMarkdown>{m.content || "…"}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-wrap">{m.content}</p>
+                    )}
+                  </div>
+                  {m.role === "assistant" && m.content && !(loading && i === messages.length - 1) && (
+                    <button
+                      onClick={() => copyMsg(i, m.content)}
+                      className="self-start inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-mono text-muted-foreground hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity px-1"
+                      aria-label="Copy reply"
+                    >
+                      {copiedIdx === i ? <><Check className="h-3 w-3" /> Copied</> : <><Copy className="h-3 w-3" /> Copy</>}
+                    </button>
                   )}
                 </div>
               </div>
@@ -262,6 +305,14 @@ export const ChatFab = () => {
                     </button>
                   ))}
                 </div>
+                <a
+                  href="https://wa.me/254714749123"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 flex items-center justify-center gap-2 text-xs px-3 py-2 rounded-lg bg-primary/5 border border-primary/20 hover:bg-primary/10 transition-colors text-primary font-medium"
+                >
+                  <Phone className="h-3.5 w-3.5" /> Prefer a human? WhatsApp 0714 749 123
+                </a>
               </div>
             )}
           </div>
@@ -277,7 +328,7 @@ export const ChatFab = () => {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Stella anything…"
+              placeholder="Ask Marian AI anything…"
               disabled={loading}
               maxLength={500}
               className="flex-1 rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-60"
@@ -286,6 +337,9 @@ export const ChatFab = () => {
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </Button>
           </form>
+          <p className="text-[10px] text-center text-muted-foreground py-1.5 bg-card border-t border-border/50">
+            Marian AI may make mistakes. For official information call <a href="tel:+254721771568" className="text-primary hover:underline">+254 721 771 568</a>.
+          </p>
         </div>
       )}
 
@@ -297,7 +351,7 @@ export const ChatFab = () => {
           "fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-40 h-14 w-14 rounded-full shadow-elevated",
           !open && "animate-pulse-glow",
         )}
-        aria-label={open ? "Close chat with Stella" : "Open chat with Stella"}
+        aria-label={open ? "Close chat with Marian AI" : "Open chat with Marian AI"}
       >
         {open ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
       </Button>
