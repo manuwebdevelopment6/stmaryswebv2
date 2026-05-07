@@ -101,6 +101,180 @@ export type Database = {
         }
         Relationships: []
       }
+      assignment_submissions: {
+        Row: {
+          assignment_id: string
+          feedback: string | null
+          file_path: string | null
+          grade: number | null
+          graded_at: string | null
+          graded_by: string | null
+          id: string
+          notes: string | null
+          submitted_at: string
+          user_id: string
+        }
+        Insert: {
+          assignment_id: string
+          feedback?: string | null
+          file_path?: string | null
+          grade?: number | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          notes?: string | null
+          submitted_at?: string
+          user_id: string
+        }
+        Update: {
+          assignment_id?: string
+          feedback?: string | null
+          file_path?: string | null
+          grade?: number | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          notes?: string | null
+          submitted_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignment_submissions_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      assignments: {
+        Row: {
+          attachment_path: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          grade_level: string | null
+          id: string
+          is_published: boolean
+          max_points: number
+          subject_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          attachment_path?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          grade_level?: string | null
+          id?: string
+          is_published?: boolean
+          max_points?: number
+          subject_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          attachment_path?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          grade_level?: string | null
+          id?: string
+          is_published?: boolean
+          max_points?: number
+          subject_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignments_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      badges: {
+        Row: {
+          criteria: Json
+          description: string | null
+          icon: string
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          criteria?: Json
+          description?: string | null
+          icon?: string
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          criteria?: Json
+          description?: string | null
+          icon?: string
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      learning_resources: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          external_url: string | null
+          file_path: string | null
+          grade_level: string | null
+          id: string
+          kind: Database["public"]["Enums"]["resource_kind"]
+          subject_id: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          external_url?: string | null
+          file_path?: string | null
+          grade_level?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["resource_kind"]
+          subject_id?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          external_url?: string | null
+          file_path?: string | null
+          grade_level?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["resource_kind"]
+          subject_id?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_resources_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       page_blocks: {
         Row: {
           block_type: string
@@ -211,6 +385,239 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_attempts: {
+        Row: {
+          answers: Json
+          id: string
+          max_score: number
+          percentage: number
+          quiz_id: string
+          score: number
+          started_at: string
+          submitted_at: string | null
+          user_id: string
+          xp_earned: number
+        }
+        Insert: {
+          answers?: Json
+          id?: string
+          max_score?: number
+          percentage?: number
+          quiz_id: string
+          score?: number
+          started_at?: string
+          submitted_at?: string | null
+          user_id: string
+          xp_earned?: number
+        }
+        Update: {
+          answers?: Json
+          id?: string
+          max_score?: number
+          percentage?: number
+          quiz_id?: string
+          score?: number
+          started_at?: string
+          submitted_at?: string | null
+          user_id?: string
+          xp_earned?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_questions: {
+        Row: {
+          correct_option_ids: string[]
+          created_at: string
+          explanation: string | null
+          id: string
+          kind: Database["public"]["Enums"]["question_kind"]
+          options: Json
+          points: number
+          position: number
+          prompt: string
+          quiz_id: string
+        }
+        Insert: {
+          correct_option_ids?: string[]
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["question_kind"]
+          options?: Json
+          points?: number
+          position?: number
+          prompt: string
+          quiz_id: string
+        }
+        Update: {
+          correct_option_ids?: string[]
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["question_kind"]
+          options?: Json
+          points?: number
+          position?: number
+          prompt?: string
+          quiz_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_questions_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quizzes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          grade_level: string | null
+          id: string
+          is_published: boolean
+          kind: Database["public"]["Enums"]["quiz_kind"]
+          subject_id: string | null
+          time_limit_seconds: number | null
+          title: string
+          updated_at: string
+          xp_reward: number
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          grade_level?: string | null
+          id?: string
+          is_published?: boolean
+          kind?: Database["public"]["Enums"]["quiz_kind"]
+          subject_id?: string | null
+          time_limit_seconds?: number | null
+          title: string
+          updated_at?: string
+          xp_reward?: number
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          grade_level?: string | null
+          id?: string
+          is_published?: boolean
+          kind?: Database["public"]["Enums"]["quiz_kind"]
+          subject_id?: string | null
+          time_limit_seconds?: number | null
+          title?: string
+          updated_at?: string
+          xp_reward?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quizzes_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      student_xp: {
+        Row: {
+          current_streak: number
+          last_active_date: string | null
+          level: number
+          longest_streak: number
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          current_streak?: number
+          last_active_date?: string | null
+          level?: number
+          longest_streak?: number
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          current_streak?: number
+          last_active_date?: string | null
+          level?: number
+          longest_streak?: number
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
+      subjects: {
+        Row: {
+          created_at: string
+          description: string | null
+          grade_level: string | null
+          icon: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          grade_level?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          grade_level?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          awarded_at: string
+          badge_id: string
+          user_id: string
+        }
+        Insert: {
+          awarded_at?: string
+          badge_id: string
+          user_id: string
+        }
+        Update: {
+          awarded_at?: string
+          badge_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -255,6 +662,9 @@ export type Database = {
         | "declined"
         | "waitlisted"
       page_status: "draft" | "published"
+      question_kind: "mcq" | "true_false" | "multi_select"
+      quiz_kind: "quiz" | "exam" | "trivia"
+      resource_kind: "note" | "past_paper" | "video" | "link" | "book"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -392,6 +802,9 @@ export const Constants = {
         "waitlisted",
       ],
       page_status: ["draft", "published"],
+      question_kind: ["mcq", "true_false", "multi_select"],
+      quiz_kind: ["quiz", "exam", "trivia"],
+      resource_kind: ["note", "past_paper", "video", "link", "book"],
     },
   },
 } as const
