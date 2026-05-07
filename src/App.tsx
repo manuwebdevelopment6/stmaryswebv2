@@ -18,6 +18,10 @@ import News from "./pages/News.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import ExamDownloads from "./pages/ExamDownloads.tsx";
 import StudentPortal from "./pages/StudentPortal.tsx";
+import Hub from "./pages/hub/Hub.tsx";
+import QuizPlayer from "./pages/hub/QuizPlayer.tsx";
+import AssignmentView from "./pages/hub/AssignmentView.tsx";
+import TeacherPanel from "./pages/hub/TeacherPanel.tsx";
 import Admin from "./pages/Admin.tsx";
 import PagesList from "./pages/admin/PagesList.tsx";
 import PageEditor from "./pages/admin/PageEditor.tsx";
@@ -50,6 +54,10 @@ const App = () => (
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/exam-downloads" element={<ExamDownloads />} />
               <Route path="/portal" element={<StudentPortal />} />
+              <Route path="/hub" element={<Hub />} />
+              <Route path="/hub/quiz/:id" element={<QuizPlayer />} />
+              <Route path="/hub/assignment/:id" element={<AssignmentView />} />
+              <Route path="/hub/teach" element={<TeacherPanel />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/pages" element={<PagesList />} />
               <Route path="/admin/pages/:slug" element={<PageEditor />} />
